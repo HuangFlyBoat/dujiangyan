@@ -14,7 +14,7 @@ import NavBar from './NavBar.vue'
 
 <style lang="scss" scoped>
 .main-layout {
-  width: 100vw;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
