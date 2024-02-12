@@ -22,7 +22,7 @@
           >
         </div>
         <div class="header-navigation-item">
-          <router-link to="/goods/0" class="" @click="handleNavClick('goods')"
+          <router-link to="/local-produce" class="" @click="handleNavClick('goods')"
             ><div class="text-label">
               <div :class="isActive('goods') ? 'showLine' : ''" class="title">土特产</div>
             </div></router-link
@@ -111,7 +111,6 @@ function isActive (url) {
     }
   }
 }
-
 .header-navigation-item:first-child {
   margin-left: 0;
 }

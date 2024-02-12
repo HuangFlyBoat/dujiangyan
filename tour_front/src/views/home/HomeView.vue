@@ -18,7 +18,7 @@
         </div>
         <div class="bottom">
           <div class="line"></div>
-          <span class="more">查看全部 ></span>
+          <router-link to="/local-produce" class="more">查看全部 ></router-link>
         </div>
       </div>
       <div class="right">
@@ -83,9 +83,9 @@
 import { ref } from 'vue'
 
 const list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const rateValue = ref(4)
 const desc = '都江堰是中国四川省的一个著名旅游景点，被誉为世界文化遗产。它以其古老而壮丽的水利工程而闻名，这个工程已有两千多年的历史。都江堰也是中国四大名著《西游记》中的重要地点之一。这里拥有壮丽的山水景观、悠久的历史文化和丰富的民俗风情，吸引着来自世界各地的游客。'
 const descEn = 'Dujiangyan is a famous tourist attraction in Sichuan, China, known as a UNESCO World Heritage site. It is renowned for its ancient and magnificent irrigation system, which has a history of over two thousand years. Dujiangyan is also an important location mentioned in one of China\'s four great classic novels, "Journey to the West." The area boasts splendid natural landscapes, rich historical and cultural heritage, and vibrant local customs, attracting visitors from around the world.'
-const rateValue = ref(4)
 
 </script>
 
@@ -147,6 +147,7 @@ const rateValue = ref(4)
           background-color: #000;
         }
         .more{
+          color: rgb(0, 107, 149);
           margin-left: 50px;
         }
       }
@@ -240,14 +241,6 @@ const rateValue = ref(4)
       }
     }
   }
-  .mt{
-    margin-top: 120px;
-  }
-  .ml{
-    margin-left: 120px;
-  }
-  .mr{
-    margin-right: 120px;
-  }
+
 }
 </style>
