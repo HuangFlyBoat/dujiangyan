@@ -38,7 +38,7 @@ import NavBar from './NavBar.vue'
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(53, 111, 134, 0.21); /* 黑色半透明蒙版 */
+  background-color: rgba(37, 87, 106, 0.325); /* 黑色半透明蒙版 */
   z-index: -1; /* 将蒙版置于导航栏背景之后 */
 }
 </style>

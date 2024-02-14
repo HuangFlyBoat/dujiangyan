@@ -1,6 +1,7 @@
 import HomeView from '@/views/home/HomeView.vue'
 import LocalProduce from '@/views/local-produce/LocalProduce.vue'
 import LayoutView from '@/components/LayoutView.vue'
+import ProductionView from '@/views/production/ProductionView.vue'
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
         path: '/local-produce',
         name: 'local-produce',
         component: LocalProduce
+      },
+      {
+        path: '/local-produce/goods/:id',
+        name: 'good',
+        component: ProductionView
       }
     ]
   }

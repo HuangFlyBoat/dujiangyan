@@ -6,4 +6,11 @@ const router = createRouter({
   routes: route
 })
 
+router.beforeEach((to, from, next) => {
+  document.body.scrollTop = 0
+  // firefox
+  document.documentElement.scrollTop = 0
+  next()
+})
+
 export default router

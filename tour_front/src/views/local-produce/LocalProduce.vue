@@ -10,7 +10,7 @@
       <p style="margin-top:30px" class="title">热门商品</p>
       <p class="title">Popular Productions</p>
       <div class="grid-container">
-          <el-card shadow="hover" :body-style="{ padding: '0px' }" v-for="item in list" :key="item" class="grid-item">
+          <el-card shadow="hover" @click="handleClick" :body-style="{ padding: '0px' }" v-for="item in list" :key="item" class="grid-item">
             <div class="top-bg">
               <img src="https://picsum.photos/300/250" alt="">
             </div>
@@ -35,8 +35,14 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+const handleClick = () => {
+  router.push(`/local-produce/goods/${1}`)
+}
 
 </script>
 
