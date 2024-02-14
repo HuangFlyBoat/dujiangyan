@@ -16,6 +16,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "userName")
+    private String userName;
 }
