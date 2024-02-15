@@ -24,7 +24,7 @@
         <div class="header-navigation-item">
           <router-link to="/local-produce" class="" @click="handleNavClick('goods')"
             ><div class="text-label">
-              <div :class="isActive('goods') ? 'showLine' : ''" class="title">土特产</div>
+              <div :class="isActive('goods') ? 'showLine' : ''" class="title">特产商城</div>
             </div></router-link
           >
         </div>
@@ -41,13 +41,6 @@
               <div :class="isActive('login') ? 'showLine' : ''" class="title" title="">登录/注册</div>
             </div>
           </router-link>
-        </div>
-        <div class="header-navigation-item">
-          <router-link to="personal" @click="handleNavClick('personal')"
-            ><div class="text-label">
-              <div :class="isActive('personal') ? 'showLine' : ''" class="title" title="">个人中心</div>
-            </div></router-link
-          >
         </div>
       </div>
     </div>
