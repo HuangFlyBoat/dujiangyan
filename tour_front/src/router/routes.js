@@ -3,6 +3,7 @@ import LocalProduce from '@/views/local-produce/LocalProduce.vue'
 import LayoutView from '@/components/LayoutView.vue'
 import ProductionView from '@/views/production/ProductionView.vue'
 import LoginView from '@/views/login/LoginView.vue'
+import CartView from '@/views/cart/CartView.vue'
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
         path: '/login',
         name: 'login',
         component: LoginView
+      },
+      {
+        path: '/cart',
+        name: 'cart',
+        component: CartView
       }
     ]
   }
