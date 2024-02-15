@@ -41,6 +41,7 @@
           </el-radio-group>
         </div>
         <div class="base-card info-item">
+          <el-input-number v-model="num" :min="1" />
           <el-space size="large">
             <el-button type="warning" style="margin-left: 15px;" round>点击购买</el-button>
             <el-button round>加入购物车</el-button>
@@ -57,6 +58,7 @@
 <script setup>
 import { ref } from 'vue'
 
+const num = ref(1)
 const radio2 = ref('2')
 </script>
 

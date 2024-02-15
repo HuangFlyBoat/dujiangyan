@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-    <div class="left">
-    </div>
-    <el-card class="box-card">
-      <div class="right">
+    <div class="card-box">
         <el-tabs
           v-model="activeName"
           class="demo-tabs"
@@ -61,8 +58,7 @@
             </el-form>
           </el-tab-pane>
         </el-tabs>
-      </div>
-    </el-card>
+    </div>
   </div>
 </template>
 
@@ -107,23 +103,16 @@ const onSubmit = () => {
   position: relative;
   width: 100%;
   height: 100vh;
-  .left {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-image: url(../../assets/loginBg.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-  }
-  .right {
-    padding: 150px 200px;
-  }
+  background-image: url(../../assets/loginBg.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
-.box-card {
-  width: 100%;
-  height: 580px;
+.card-box {
+  padding: 30px;
+  margin:  180px auto 0 auto;
+  width: 600px;
+  border-radius: 10px;
+  background-color: #0f232f69;
 }
 
 .demo-tabs > .el-tabs__content {
