@@ -1,15 +1,15 @@
 package com.dujiangyan.tour_server.service.impl;
 
+import com.dujiangyan.tour_server.domain.LoginInfo;
 import com.dujiangyan.tour_server.domain.UserRegisterRequest;
 import com.dujiangyan.tour_server.entity.User;
 import com.dujiangyan.tour_server.repository.UserRepository;
 import com.dujiangyan.tour_server.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Service
@@ -56,10 +56,12 @@ public class UserServiceImpl implements UserService {
         String password = loginUser.getPassword();
 
         User user = userRepository.findUserByUserName(username);
+        LoginInfo loginInfo = new LoginInfo();
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            request.getSession().setAttribute("login", user);
-            Object userObj = request.getSession().getAttribute("login");
-            User curren = (User) userObj;
+            user.setPassword(null);
+            loginInfo.setName(username);
+            loginInfo.setId(user.getUserId());
+            request.getSession().setAttribute("login", loginInfo);
             return user;
         } else {
             return null;

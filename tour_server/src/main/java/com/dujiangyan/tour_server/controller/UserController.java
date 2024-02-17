@@ -4,7 +4,9 @@ import com.dujiangyan.tour_server.common.BaseResponse;
 import com.dujiangyan.tour_server.common.ErrorCode;
 import com.dujiangyan.tour_server.common.ResultUtils;
 import com.dujiangyan.tour_server.domain.UserRegisterRequest;
+import com.dujiangyan.tour_server.entity.Admin;
 import com.dujiangyan.tour_server.entity.User;
+import com.dujiangyan.tour_server.service.AdminService;
 import com.dujiangyan.tour_server.service.UserService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +19,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+
+
 
 
     @PostMapping("/register")
@@ -40,6 +45,7 @@ public class UserController {
             return ResultUtils.success(user);
         }
     }
+
 
     @GetMapping("/test")
     public BaseResponse test() {
