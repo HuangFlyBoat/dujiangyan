@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
     // 放行路径
-    private static final List<String> EXEMPT_PATHS = Arrays.asList("/user/register", "/user/login");
+    private static final List<String> EXEMPT_PATHS = Arrays.asList("/user/register", "/user/login","/admin/login");
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
