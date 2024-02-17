@@ -8,7 +8,9 @@ public enum ErrorCode {
     SUCCESS(0, "success", ""),
     PARAMS_ERROR(40000, "请求参数错误", ""),
     NULL_ERROR(400001, "请求数据为空", ""),
-    NOT_LOGIN(40100, "未登录", ""),
+    NOT_LOGIN(40100, "用户未登录", ""),
+    REGISTER_ERROR(40002, "注册失败", ""),
+    LOGIN_ERROR(40003, "登录失败", ""),
     NO_AUTH(40101, "无权限", ""),
     //屏蔽了所有的服务器的报错
     SYSTEM_ERROR(50000, "系统内部异常", "");
