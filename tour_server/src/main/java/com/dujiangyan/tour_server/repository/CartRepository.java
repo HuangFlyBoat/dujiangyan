@@ -20,4 +20,8 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
             "WHERE c.userId = :userId")
     List<CartInfo> getCartList(@Param("userId") Integer userId);
 
+
+    Cart findCartByUserIdAndProduct_IdAndSpe_SpeId(Integer userId, Integer productId, Integer speId);
+
+
 }

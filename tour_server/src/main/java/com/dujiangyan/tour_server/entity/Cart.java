@@ -27,4 +27,5 @@ public class Cart {
     @JoinColumn(name = "speId")
     private Spe spe;
 
+
 }
