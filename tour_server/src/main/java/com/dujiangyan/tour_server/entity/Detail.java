@@ -11,13 +11,13 @@ public class Detail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "orderId")
-    private long orderId;
+    private int orderId;
 
     @Column(name = "productId")
-    private long productId;
+    private int productId;
 
     @Column(name = "number")
     private int number;

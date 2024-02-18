@@ -11,7 +11,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)   //生成策略，这里配置为自增
     @Column(name = "id")    //对应表中id这一列
     @Id     //此属性为主键
-    private long id;
+    private int id;
 
     @Column(name = "name")   //对应表中name这一列
     private String name;
@@ -23,7 +23,7 @@ public class Address {
     private String place;
 
     @Column(name = "userId")
-    private long userId;
+    private int userId;
 
 
 }

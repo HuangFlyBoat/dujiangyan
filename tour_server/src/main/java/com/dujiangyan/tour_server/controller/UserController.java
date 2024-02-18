@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("/register")
     public BaseResponse register(@RequestBody UserRegisterRequest userRegisterRequest) {
-        long userId = userService.userRegister(userRegisterRequest);
+        int userId = userService.userRegister(userRegisterRequest);
         if (userId == -1) {
             return ResultUtils.error(ErrorCode.REGISTER_ERROR);
         } else {

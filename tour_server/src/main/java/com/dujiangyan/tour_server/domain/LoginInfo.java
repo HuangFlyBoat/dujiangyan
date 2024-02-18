@@ -5,9 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
 
-@Data
-public class LoginInfo {
+import java.io.Serializable;
 
-    private long id;
+@Data
+public class LoginInfo  implements Serializable {
+
+    private int id;
     private String name;
 }

@@ -11,11 +11,11 @@ public class AttractionImg {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "imgUrl")
     private String imgUrl;
 
     @Column(name = "attractionId")
-    private long attractionId;
+    private int attractionId;
 }

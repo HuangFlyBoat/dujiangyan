@@ -9,7 +9,7 @@ public interface UserService {
      * 用户注册
      * @return 如果登录成功，返回用户的ID；如果登录失败，返回-1。
      */
-    long userRegister(UserRegisterRequest userRegisterRequest);
+    int userRegister(UserRegisterRequest userRegisterRequest);
 
     /**
      * 用户登录

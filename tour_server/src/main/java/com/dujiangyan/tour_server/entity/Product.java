@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,7 +14,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -26,4 +27,9 @@ public class Product {
 
     @Column(name = "detailImg")
     private String detailImg;
+
+    @OneToMany(mappedBy = "product")
+    private List<Cart> carts;
+
+
 }

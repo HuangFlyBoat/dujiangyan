@@ -3,7 +3,7 @@ package com.dujiangyan.tour_server.interceptor;
 import com.dujiangyan.tour_server.common.BaseResponse;
 import com.dujiangyan.tour_server.common.ErrorCode;
 import com.dujiangyan.tour_server.common.ResultUtils;
-import com.dujiangyan.tour_server.entity.User;
+import com.dujiangyan.tour_server.domain.LoginInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,10 +40,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 
         // 检查用户是否已经登录
-        User user = (User) request.getSession().getAttribute("login");
+        LoginInfo userInfo = (LoginInfo) request.getSession().getAttribute("login");
 
         // 用户未登录时的响应
-        if (user == null) {
+        if (userInfo == null) {
             BaseResponse baseResponse = ResultUtils.error(ErrorCode.NOT_LOGIN);
             String jsonResponse = objectMapper.writeValueAsString(baseResponse);
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

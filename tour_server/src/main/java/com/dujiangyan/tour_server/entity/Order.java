@@ -13,10 +13,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "userId")
-    private long userId;
+    private int userId;
 
     @Column(name = "date")
     private String date;
@@ -25,5 +25,5 @@ public class Order {
     private BigDecimal total;
 
     @Column(name = "addressId")
-    private long addressId;
+    private int addressId;
 }

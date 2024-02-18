@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public long userRegister(UserRegisterRequest userRegisterRequest) {
+    public int userRegister(UserRegisterRequest userRegisterRequest) {
         String username = userRegisterRequest.getUserName();
         String password = userRegisterRequest.getPassword();
         String password2 = userRegisterRequest.getPassword2();
