@@ -1,18 +1,28 @@
 package com.dujiangyan.tour_server.controller;
-import com.dujiangyan.tour_server.repository.CartRepository;
+
+import com.dujiangyan.tour_server.common.BaseResponse;
+import com.dujiangyan.tour_server.common.ResultUtils;
+import com.dujiangyan.tour_server.domain.CartInfo;
+import com.dujiangyan.tour_server.service.CartService;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/cart")
 public class CartController {
-    private final CartRepository cartRepository;
+    @Resource
+    private CartService cartService;
 
-    public CartController(CartRepository cartRepository) {
-        this.cartRepository = cartRepository;
+
+    @GetMapping("/getCartList")
+    public BaseResponse<List<CartInfo>> getCartList(HttpServletRequest request) {
+        return ResultUtils.success(cartService.getCartList(request));
     }
 
-    // 添加其他方法，处理购物车相关的请求和操作
-    // 可以根据需求自行定义接口
 }

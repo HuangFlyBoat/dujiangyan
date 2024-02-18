@@ -11,17 +11,20 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Integer id;
 
-    @Column(name = "productId")
-    private String productId;
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
 
     @Column(name = "userId")
-    private String userId;
+    private Integer userId;
 
     @Column(name = "number")
     private int number;
 
-    @Column(name = "speId")
-    private String speId;
+    @ManyToOne
+    @JoinColumn(name = "speId")
+    private Spe spe;
+
 }

@@ -1,5 +1,11 @@
 package com.dujiangyan.tour_server.service;
 
+import com.dujiangyan.tour_server.domain.CartInfo;
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.util.List;
+
 public interface CartService {
-    // 可以在此处定义服务接口中的方法
+
+    List<CartInfo> getCartList(HttpServletRequest request);
 }
