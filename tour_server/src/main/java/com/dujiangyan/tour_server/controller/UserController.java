@@ -26,13 +26,12 @@ public class UserController {
 
     @PostMapping("/register")
     public BaseResponse register(@RequestBody UserRegisterRequest userRegisterRequest) {
-        int userId = userService.userRegister(userRegisterRequest);
-        if (userId == -1) {
+        User userRegister = userService.userRegister(userRegisterRequest);
+        if (userRegister == null) {
             return ResultUtils.error(ErrorCode.REGISTER_ERROR);
         } else {
-            User user = new User();
-            user.setUserId(userId);
-            return ResultUtils.success(user);
+            userRegister.setPassword(null);
+            return ResultUtils.success(userRegister);
         }
     }
 

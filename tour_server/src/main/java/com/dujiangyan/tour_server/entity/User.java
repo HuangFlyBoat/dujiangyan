@@ -18,4 +18,10 @@ public class User {
 
     @Column(name = "userName")
     private String userName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
 }
