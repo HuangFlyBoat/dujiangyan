@@ -12,5 +12,4 @@ public class DetailServiceImpl implements DetailService {
         this.detailRepository = detailRepository;
     }
 
-    // 在这里实现 DetailService 接口中定义的方法
 }

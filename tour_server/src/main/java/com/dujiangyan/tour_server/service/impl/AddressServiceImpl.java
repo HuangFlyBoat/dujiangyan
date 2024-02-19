@@ -12,5 +12,4 @@ public class AddressServiceImpl implements AddressService {
         this.addressRepository = addressRepository;
     }
 
-    // 在这里实现 AddressService 接口中定义的方法
 }

@@ -12,5 +12,4 @@ public class SpeServiceImpl implements SpeService {
         this.speRepository = speRepository;
     }
 
-    // 在这里实现 SpeService 接口中定义的方法
 }
