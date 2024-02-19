@@ -25,3 +25,5 @@ spring:
     store-type: jdbc
     jdbc:
       table-name: SPRING_SESSION
+    # 31 days
+    timeout: 2678400
