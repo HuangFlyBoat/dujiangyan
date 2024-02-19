@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DetailRepository extends JpaRepository<Detail, Integer> {
-    // 可根据需要添加自定义方法
+    
 }
