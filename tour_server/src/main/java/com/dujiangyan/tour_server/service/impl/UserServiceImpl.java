@@ -23,21 +23,21 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public int userRegister(UserRegisterRequest userRegisterRequest) {
+    public User userRegister(UserRegisterRequest userRegisterRequest) {
         String username = userRegisterRequest.getUserName();
         String password = userRegisterRequest.getPassword();
         String password2 = userRegisterRequest.getPassword2();
 
         // 判断两次密码是否一致
         if (!password.equals(password2)) {
-            return -1;
+            return null;
         }
 
         // 检查用户名是否已经被注册
         User existingUser = userRepository.findUserByUserName(username);
         if (existingUser != null) {
             log.info("User already exists");
-            return -1;
+            return null;
         }
 
 
@@ -45,7 +45,9 @@ public class UserServiceImpl implements UserService {
         User newUser = new User();
         newUser.setUserName(username);
         newUser.setPassword(passwordEncoder.encode(password));  // 加密密码
-        return userRepository.save(newUser).getUserId();
+        newUser.setPhone(userRegisterRequest.getPhone());
+        newUser.setEmail(userRegisterRequest.getEmail());
+        return userRepository.save(newUser);
 
 
     }

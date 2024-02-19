@@ -7,9 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 public interface UserService {
     /**
      * 用户注册
-     * @return 如果登录成功，返回用户的ID；如果登录失败，返回-1。
+     * @return 如果登录成功，返回用户的信息；如果登录失败，返回null。
      */
-    int userRegister(UserRegisterRequest userRegisterRequest);
+    User userRegister(UserRegisterRequest userRegisterRequest);
 
     /**
      * 用户登录
