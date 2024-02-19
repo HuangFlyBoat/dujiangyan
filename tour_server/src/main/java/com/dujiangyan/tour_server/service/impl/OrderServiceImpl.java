@@ -1,16 +1,21 @@
 package com.dujiangyan.tour_server.service.impl;
 
+import com.dujiangyan.tour_server.entity.Order;
 import com.dujiangyan.tour_server.repository.OrderRepository;
 import com.dujiangyan.tour_server.service.OrderService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    private final OrderRepository orderRepository;
+    @Resource
+    private OrderRepository orderRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+
+    @Override
+    public List<Order> findByUserId(int userId) {
+        return orderRepository.findByUserId(userId);
     }
-
-    // 在这里实现 OrderService 接口中定义的方法
 }
