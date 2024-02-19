@@ -1,5 +1,6 @@
 package com.dujiangyan.tour_server.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,9 @@ public class AttractionImg {
     @Column(name = "imgUrl")
     private String imgUrl;
 
-    @Column(name = "attractionId")
-    private int attractionId;
+    @ManyToOne
+    @JsonBackReference
+
+    @JoinColumn(name = "attractionId")
+    private Attraction attraction;
 }

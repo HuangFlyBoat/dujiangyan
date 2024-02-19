@@ -1,8 +1,11 @@
 package com.dujiangyan.tour_server.service.impl;
 
+import com.dujiangyan.tour_server.entity.Attraction;
 import com.dujiangyan.tour_server.repository.AttractionRepository;
 import com.dujiangyan.tour_server.service.AttractionService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AttractionServiceImpl implements AttractionService {
@@ -12,5 +15,10 @@ public class AttractionServiceImpl implements AttractionService {
         this.attractionRepository = attractionRepository;
     }
 
-    // 在这里实现 AttractionService 接口中定义的方法
+    @Override
+    public List<Attraction> getAttractionList() {
+        return attractionRepository.findAllWithImages();
+
+    }
+
 }

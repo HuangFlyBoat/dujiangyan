@@ -1,5 +1,10 @@
 package com.dujiangyan.tour_server.service;
 
+import com.dujiangyan.tour_server.entity.Attraction;
+
+import java.util.List;
+
 public interface AttractionService {
-    // 可以在此处定义服务接口中的方法
+    List<Attraction> getAttractionList();
+
 }
