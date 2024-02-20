@@ -7,32 +7,35 @@
       <div style="width: 220px;padding-left: 180px;">小计</div>
     </div>
     <div class="list">
-      <div class="card" v-for="item in list" :key="item.id">
+      <div class="card" v-for="item in list" :key="item">
         <el-card shadow="never">
           <div class="card-item">
             <el-checkbox v-model="item.checked"  size="large" />
             <div class="img-box">
-              <img style="width: 100%; height:100%" src="https://picsum.photos/300/250" alt="">
+              <img style="width: 100%; height:100%" :src="item.productImg" alt="">
             </div>
-            <p class="title">title</p>
-            <p class="price">￥18.00</p>
+            <div class="title">
+              <p style="font-size: large;padding-bottom: 10px;">{{ item.productName }}</p>
+              <p style="font-size: small;color: rgb(101, 101, 101);">{{ item.speName }}</p>
+            </div>
+            <p class="price">￥{{ item.productPrice }}</p>
             <div class="number">
-              <el-input-number @change="onNumberChange" v-model="item.num"/>
+              <el-input-number @change="onNumberChange" v-model="item.number"/>
             </div>
-            <p class="total">￥18.00</p>
+            <p class="total">￥{{ item.productPrice * item.number }}</p>
           </div>
         </el-card>
       </div>
     </div>
     <div class="bottom">
       <div class="bottom-left">
-        <el-checkbox v-model="isAll" label="全选" size="large" />
+        <el-checkbox @click="onCahngeAll" :value="isAll" label="全选" size="large" />
         <el-button type="text" >清空购物车</el-button>
-        <span>已选择{{ `${0}` }}件</span>
+        <span>已选择{{ `${totalChecked}` }}件</span>
       </div>
       <div class="bottom-right">
         <span>总价：</span>
-        <span>￥115</span>
+        <span>￥{{ total }}</span>
         <el-button type="primary" style="margin-left: 15px">结算</el-button>
       </div>
     </div>
@@ -40,37 +43,87 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
+import g1 from '../../assets/home/goods/g1.png'
+import g2 from '../../assets/home/goods/g2.png'
+import g3 from '../../assets/home/goods/g3.png'
 
 const list = ref([
   {
-    id: 1,
-    checked: false
+    cartId: 1,
+    userId: 2,
+    number: 1,
+    productId: 1,
+    productName: '青城雪芽',
+    productImg: g1,
+    productPrice: 32.5,
+    productDetailImg: 'product2_detail.jpg',
+    speId: 1,
+    speName: '青城雪芽53克*1袋'
   },
   {
-    id: 2,
-    checked: false
+    cartId: 1,
+    userId: 2,
+    number: 3,
+    productId: 2,
+    productName: '匠心腊味礼盒',
+    productImg: g2,
+    productPrice: 259,
+    productDetailImg: 'product2_detail.jpg',
+    speId: 2,
+    speName: '匠心腊味礼盒2520g'
   },
   {
-    id: 3,
-    checked: false
-  },
-  {
-    id: 4,
-    checked: false
-  },
-  {
-    id: 5,
-    checked: false
-  },
-  {
-    id: 6,
-    checked: false
+    cartId: 1,
+    userId: 2,
+    number: 1,
+    productId: 3,
+    productName: '李记乐宝酸菜粉丝',
+    productImg: g3,
+    productPrice: 29.9,
+    productDetailImg: 'product2_detail.jpg',
+    speId: 2,
+    speName: '李记乐宝酸菜粉丝160g*6桶'
   }
 ])
 const isAll = ref(false)
+
+const total = computed(() => {
+  let total = 0
+  const filterList = list.value.filter((item) => item.checked)
+  if (filterList.length === 0) return total
+  filterList.forEach((item) => {
+    total += item.productPrice * item.number
+  })
+  return total
+})
+
+const totalChecked = computed(() => {
+  const filterList = list.value.filter((item) => item.checked)
+  return filterList.length
+})
+
 const onNumberChange = (number) => {
   console.log(number)
+}
+
+watch(list.value, () => {
+  let flag = false
+  list.value.forEach((item) => {
+    if (!item.checked) {
+      flag = true
+    }
+  })
+
+  flag ? isAll.value = false : isAll.value = true
+  console.log(isAll.value)
+})
+
+const onCahngeAll = () => {
+  isAll.value = !isAll.value
+  list.value.forEach(item => {
+    isAll.value ? item.checked = true : item.checked = false
+  })
 }
 
 </script>

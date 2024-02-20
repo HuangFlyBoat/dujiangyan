@@ -4,39 +4,24 @@
       <div class="img" data-v-2a07f562="">
         <img
           class="cover-img"
-          src="https://p1-cdn-holiland.1900m.com/goods/cover_s/202308/11/2922a1691744698b6773.jpg?x-oss-process=image/resize,m_fill,limit_0,w_630,h_630" />
+          :src="itemInfo.img" />
       </div>
       <div class="info">
         <div class="base-card info-item">
           <div class="base-card-inner">
-            <div class="name">教师节蛋糕-桃李春风</div>
+            <div class="name">{{ itemInfo.name }}</div>
             <div class="price">
-              <span class="base-price">¥ 239</span>
+              <span class="base-price">¥ {{ itemInfo.price }}</span>
             </div>
           </div>
         </div>
         <div class="base-card info-item">
           <div class="title">类型选择</div>
           <el-radio-group v-model="radio2">
-            <el-radio style="padding: 24px 0;"
-              label="Φ14cm*h7cm "
-            >Φ14cm*h7cm
-              <div class="extra">（建议2至4人食用）</div>
-            </el-radio>
-            <el-radio style="padding: 24px 0;"
-              label="Φ14cm*h8cm "
-            >Φ14cm*h8cm
-              <div class="extra">（建议2至4人食用）</div>
-            </el-radio>
-            <el-radio style="padding: 24px 0;"
-              label="Φ14cm*h8cm "
-            >Φ14cm*h8cm
-              <div class="extra">（建议2至4人食用）</div>
-            </el-radio>
-            <el-radio style="padding: 24px 0;"
-              label="Φ14cm*h8cm "
-            >Φ14cm*h8cm
-              <div class="extra">（建议2至4人食用）</div>
+            <el-radio v-for="item in itemInfo.speList" :key="item.speId" style="padding: 24px 0;"
+              :label="item.name"
+            >
+              <div class="extra">{{ item.name }}</div>
             </el-radio>
           </el-radio-group>
         </div>
@@ -50,13 +35,31 @@
       </div>
     </div>
     <div class="long-img">
-      <el-image style="width: 100%;min-height: 600px;" src="https://picsum.photos/600/1000" fit="contain" />
+      <el-image style="width: 100%;min-height: 600px;" :src="itemInfo.detailImg" fit="contain" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import g1 from '../../assets/home/goods/g1.png'
+import g1n from '../../assets/home/goods/g1n.png'
+
+const itemInfo =
+  {
+    id: 1,
+    name: '青城雪芽',
+    img: g1,
+    price: 32.5,
+    detailImg: g1n,
+    speList: [
+      {
+        speId: 1,
+        name: '青城雪芽53克*1袋',
+        productId: 1
+      }
+    ]
+  }
 
 const num = ref(1)
 const radio2 = ref('2')
@@ -67,15 +70,15 @@ const radio2 = ref('2')
   margin-top: 66px;
   width: 65%;
   .detail {
+    padding: 30px 0;
     display: flex;
-    height: 634px;
+    min-height: 634px;
     align-items: center;
     .img {
       width: 500px;
       flex-shrink: 0;
       .cover-img {
         width: 100%;
-        height: 500px;
         border-radius: 20px;
       }
     }
@@ -101,7 +104,7 @@ const radio2 = ref('2')
             margin-left: 25px;
             font-size: 28px;
             font-weight: 500;
-            color: #cb986d;
+            color: #f37777;
             line-height: 29px;
             vertical-align: top;
             white-space: nowrap;
