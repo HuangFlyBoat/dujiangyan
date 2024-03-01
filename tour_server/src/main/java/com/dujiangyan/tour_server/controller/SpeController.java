@@ -1,6 +1,6 @@
 package com.dujiangyan.tour_server.controller;
 
-import com.dujiangyan.tour_server.repository.SpeRepository;
+import com.dujiangyan.tour_server.service.repository.SpeRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 @RestController

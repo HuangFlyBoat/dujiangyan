@@ -1,7 +1,7 @@
 package com.dujiangyan.tour_server.controller;
 
 import com.dujiangyan.tour_server.entity.Address;
-import com.dujiangyan.tour_server.repository.AddressRepository;
+import com.dujiangyan.tour_server.service.repository.AddressRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

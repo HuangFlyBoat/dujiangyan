@@ -1,4 +1,4 @@
-package com.dujiangyan.tour_server.repository;
+package com.dujiangyan.tour_server.service.repository;
 
 import com.dujiangyan.tour_server.entity.Detail;
 import org.springframework.data.jpa.repository.JpaRepository;

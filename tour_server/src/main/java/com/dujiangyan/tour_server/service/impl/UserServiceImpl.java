@@ -3,13 +3,15 @@ package com.dujiangyan.tour_server.service.impl;
 import com.dujiangyan.tour_server.domain.LoginInfo;
 import com.dujiangyan.tour_server.domain.UserRegisterRequest;
 import com.dujiangyan.tour_server.entity.User;
-import com.dujiangyan.tour_server.repository.UserRepository;
 import com.dujiangyan.tour_server.service.UserService;
+import com.dujiangyan.tour_server.service.repository.UserRepository;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -30,6 +32,11 @@ public class UserServiceImpl implements UserService {
 
         // 判断两次密码是否一致
         if (!password.equals(password2)) {
+            return null;
+        }
+
+        // 判断密码长度是否大于6
+        if (password.length() < 6) {
             return null;
         }
 
@@ -68,6 +75,12 @@ public class UserServiceImpl implements UserService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<User> userList() {
+        List<User> userList = userRepository.findAll();
+        return userList;
     }
 
 }

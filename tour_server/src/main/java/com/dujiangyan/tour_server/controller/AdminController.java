@@ -1,13 +1,17 @@
 package com.dujiangyan.tour_server.controller;
+
 import com.dujiangyan.tour_server.common.BaseResponse;
 import com.dujiangyan.tour_server.common.ErrorCode;
 import com.dujiangyan.tour_server.common.ResultUtils;
 import com.dujiangyan.tour_server.entity.Admin;
-import com.dujiangyan.tour_server.repository.AdminRepository;
+import com.dujiangyan.tour_server.entity.User;
 import com.dujiangyan.tour_server.service.AdminService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin")
@@ -27,5 +31,17 @@ public class AdminController {
             return ResultUtils.success(admin);
         }
     }
+
+    @PostMapping("/edit")
+    public BaseResponse editUSER(@RequestBody User user, HttpServletRequest request) {
+        Integer result = adminService.editUser(user);
+        if (result == -1) {
+            return ResultUtils.error(ErrorCode.EDIT_ERROR);
+        } else {
+            return ResultUtils.success(result);
+        }
+
+    }
+
 
 }

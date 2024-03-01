@@ -25,5 +25,7 @@ public class Spe {
     @JoinColumn(name = "productId")
     private Product product;
 
+
+
     // getters and setters
 }
