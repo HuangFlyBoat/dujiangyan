@@ -4,7 +4,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import App from './App.vue'
 import router from './router'
 
-import 'element-plus/dist/index.css'
+import './styles/element/index.scss'
 // 引入模板的全局的样式
 import '@/styles/index.scss'
 

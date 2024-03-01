@@ -30,6 +30,14 @@
               <el-form-item label="用户名" prop="userName">
                 <el-input v-model="form.userName" />
               </el-form-item>
+              <el-form-item label="邮箱" prop="email">
+                <el-input v-model="form.email"
+                />
+              </el-form-item>
+              <el-form-item label="手机号" prop="phone">
+                <el-input v-model="form.phone"
+                />
+              </el-form-item>
               <el-form-item label="密码" prop="password">
                 <el-input
                   type="password"
@@ -69,7 +77,9 @@ const activeName = ref('first')
 const form = ref({
   userName: '',
   password: '',
-  userSex: '男'
+  userSex: '男',
+  email: '',
+  phone: ''
 })
 
 const rules = reactive({
@@ -80,6 +90,14 @@ const rules = reactive({
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
     { min: 8, max: 20, message: '长度控制在8-20以内', trigger: 'blur' }
+  ],
+  email: [
+    { required: true, message: '请输入邮箱', trigger: 'blur' },
+    { min: 3, max: 20, message: '长度控制在3-20以内', trigger: 'blur' }
+  ],
+  phone: [
+    { required: true, message: '请输入手机号', trigger: 'blur' },
+    { min: 3, max: 20, message: '长度控制在3-20以内', trigger: 'blur' }
   ]
 })
 
