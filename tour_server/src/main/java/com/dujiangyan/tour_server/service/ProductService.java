@@ -1,6 +1,7 @@
 package com.dujiangyan.tour_server.service;
 
 import com.dujiangyan.tour_server.domain.ProductAddRequest;
+import com.dujiangyan.tour_server.domain.ProductDTO;
 import com.dujiangyan.tour_server.domain.ProductDetail;
 import com.dujiangyan.tour_server.entity.Product;
 
@@ -35,5 +36,5 @@ public interface ProductService {
      * 编辑土特产
      * @param product 土特产信息
      */
-    Product editProductWithSpe(Product product);
+    ProductDTO editProductWithSpe(Product product);
 }

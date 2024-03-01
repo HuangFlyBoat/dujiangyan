@@ -4,6 +4,7 @@ import com.dujiangyan.tour_server.common.BaseResponse;
 import com.dujiangyan.tour_server.common.ErrorCode;
 import com.dujiangyan.tour_server.common.ResultUtils;
 import com.dujiangyan.tour_server.domain.ProductAddRequest;
+import com.dujiangyan.tour_server.domain.ProductDTO;
 import com.dujiangyan.tour_server.domain.ProductDetail;
 import com.dujiangyan.tour_server.entity.Product;
 import com.dujiangyan.tour_server.service.ProductService;
@@ -52,8 +53,13 @@ public class ProductController {
 
     @PostMapping("/edit")
     public BaseResponse editProduct(@RequestBody Product product) {
-        Product product1 = productService.editProductWithSpe(product);
-        return ResultUtils.success(product1);
+        ProductDTO product1 = productService.editProductWithSpe(product);
+        if (product1 == null) {
+            return ResultUtils.error(ErrorCode.EDIT_ERROR);
+        } else {
+            return ResultUtils.success(product1);
+        }
+
     }
 
 

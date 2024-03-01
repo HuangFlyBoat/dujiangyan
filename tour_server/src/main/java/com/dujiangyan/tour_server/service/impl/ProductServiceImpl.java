@@ -1,6 +1,7 @@
 package com.dujiangyan.tour_server.service.impl;
 
 import com.dujiangyan.tour_server.domain.ProductAddRequest;
+import com.dujiangyan.tour_server.domain.ProductDTO;
 import com.dujiangyan.tour_server.domain.ProductDetail;
 import com.dujiangyan.tour_server.entity.Product;
 import com.dujiangyan.tour_server.entity.Spe;
@@ -28,6 +29,17 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductList() {
         return productRepository.findAll();
     }
+
+    public ProductDTO convertToDTO(Product product) {
+        ProductDTO dto = new ProductDTO();
+        dto.setId(product.getId());
+        dto.setName(product.getName());
+        dto.setImg(product.getImg());
+        dto.setPrice(product.getPrice());
+        dto.setDetailImg(product.getDetailImg());
+        return dto;
+    }
+
 
     @Override
     public ProductDetail findById(int id) {
@@ -87,7 +99,7 @@ public class ProductServiceImpl implements ProductService {
 
         @Override
         @Transactional
-        public Product editProductWithSpe(Product newProduct) {
+        public ProductDTO editProductWithSpe(Product newProduct) {
             Optional<Product> oldProductOpt = productRepository.findById(newProduct.getId());
 
             if (oldProductOpt.isPresent()) {
@@ -111,9 +123,10 @@ public class ProductServiceImpl implements ProductService {
 
                 // 在这里添加其他字段的检查和更新
 
-                return productRepository.save(oldProduct);
+                return convertToDTO(productRepository.save(oldProduct));
             } else {
-                throw new RuntimeException("Product not found with id " + newProduct.getId());
+                return null;
             }
         }
-}
+        }
+
