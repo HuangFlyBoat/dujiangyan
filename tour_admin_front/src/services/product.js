@@ -13,7 +13,7 @@ const dessertListService = async (page = 1) => {
 
 const deleteService = async dessertId => {
   try {
-    await http.post('/dessert/deleteDessert', { dessertId })
+    await http.post('/product/delete', { dessertId })
     return
   } catch (error) {
     MessagePlugin.error(`服务异常,${error}`)
@@ -23,7 +23,7 @@ const deleteService = async dessertId => {
 
 const addService = async formData => {
   try {
-    await http.post('/dessert/addDessert', { ...formData })
+    await http.post('/product/addProduct', { ...formData })
     return
   } catch (error) {
     MessagePlugin.error(`服务异常,${error}`)
