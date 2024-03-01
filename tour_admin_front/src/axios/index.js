@@ -2,16 +2,9 @@ import axios from 'axios'
 import { MessagePlugin } from 'tdesign-vue-next'
 
 const service = axios.create({
-  baseURL: 'http://localhost:9898/api', // url = base url + request url
+  baseURL: 'http://localhost:8888', // url = base url + request url
   timeout: 15000 // request timeout
 })
-
-service.interceptors.request.use(
-  error => {
-    console.log(error) // for debug
-    return Promise.reject(error)
-  }
-)
 
 service.interceptors.response.use(
   response => {
@@ -28,7 +21,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('接口信息报错' + error)
+    console.log('接口信息报错' + JSON.stringify(error))
     return Promise.reject(error)
   }
 )
