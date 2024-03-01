@@ -4,6 +4,8 @@ import com.dujiangyan.tour_server.domain.UserRegisterRequest;
 import com.dujiangyan.tour_server.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 public interface UserService {
     /**
      * 用户注册
@@ -18,5 +20,15 @@ public interface UserService {
      * @return
      */
     User userLogin(User loginUser, HttpServletRequest request);
+
+
+    /**
+     * 获取用户列表
+     * @return
+     */
+    List<User> userList();
+
+
+
 
 }

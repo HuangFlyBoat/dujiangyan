@@ -31,5 +31,8 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Cart> carts;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Spe> speList;
+
 
 }

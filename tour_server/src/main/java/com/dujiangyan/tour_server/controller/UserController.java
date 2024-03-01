@@ -45,6 +45,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/userList")
+    public BaseResponse userList() {
+        return ResultUtils.success(userService.userList());
+    }
+
 
     @GetMapping("/test")
     public BaseResponse test() {

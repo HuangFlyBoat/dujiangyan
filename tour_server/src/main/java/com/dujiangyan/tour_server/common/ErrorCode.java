@@ -12,6 +12,8 @@ public enum ErrorCode {
     REGISTER_ERROR(40002, "注册失败", ""),
     LOGIN_ERROR(40003, "登录失败", ""),
     NO_AUTH(40101, "无权限", ""),
+
+    EDIT_ERROR(40004, "编辑失败", ""),
     //屏蔽了所有的服务器的报错
     SYSTEM_ERROR(50000, "系统内部异常", "");
 

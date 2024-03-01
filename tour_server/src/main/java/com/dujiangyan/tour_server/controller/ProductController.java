@@ -1,15 +1,14 @@
 package com.dujiangyan.tour_server.controller;
 
 import com.dujiangyan.tour_server.common.BaseResponse;
+import com.dujiangyan.tour_server.common.ErrorCode;
 import com.dujiangyan.tour_server.common.ResultUtils;
+import com.dujiangyan.tour_server.domain.ProductAddRequest;
 import com.dujiangyan.tour_server.domain.ProductDetail;
 import com.dujiangyan.tour_server.entity.Product;
 import com.dujiangyan.tour_server.service.ProductService;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +29,26 @@ public class ProductController {
     @GetMapping("/getDetail")
     public BaseResponse<ProductDetail> getDetail(@RequestParam int id) {
         return ResultUtils.success(productService.findById(id));
+    }
+
+    @PostMapping("/addProduct")
+    public BaseResponse addProduct(@RequestBody ProductAddRequest productAddRequest) {
+        int result = productService.addProductWithSpe(productAddRequest);
+        if (result == -1) {
+            return ResultUtils.error(ErrorCode.EDIT_ERROR);
+        }
+        return ResultUtils.success(result);
+    }
+
+    @PostMapping("/delete")
+    public BaseResponse addProduct(@RequestBody Product product) {
+        int result = productService.deleteProductAndSpe(product.getId());
+        if (result == -1) {
+            return ResultUtils.error(ErrorCode.EDIT_ERROR);
+        } else {
+            return ResultUtils.success(ErrorCode.SUCCESS);
+        }
+
     }
 
 }
