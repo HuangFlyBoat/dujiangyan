@@ -15,9 +15,9 @@
           @reset="onReset"
           @submit="onSubmit"
         >
-          <t-form-item name="userName">
+          <t-form-item name="name">
             <span style="width: 70px;">用户名：</span>
-            <t-input v-model="formData.userName" clearable placeholder="请输入用户名">
+            <t-input v-model="formData.name" clearable placeholder="请输入用户名">
             </t-input>
           </t-form-item>
 
@@ -46,12 +46,12 @@ import { setToken } from '@/utils/auth'
 const router = useRouter()
 
 const formData = reactive({
-  userName: '',
+  name: '',
   password: ''
 })
 
 const rules = {
-  userName: [{ required: true, message: '用户名必填', type: 'error' }],
+  name: [{ required: true, message: '用户名必填', type: 'error' }],
   password: [{ required: true, message: '密码必填', type: 'error' }]
 }
 
@@ -62,13 +62,13 @@ const onReset = () => {
 const onSubmit = async ({ validateResult, firstError }) => {
   if (validateResult === true) {
     const res = await loginService({ ...formData })
-    console.log(res)
+    console.log('resres', res)
     if (res.isAdmin !== 1) {
       MessagePlugin.warning('登录失败，权限不足')
     } else {
       MessagePlugin.success('登录成功')
       setToken(res.token)
-      localStorage.setItem('userName', res.userName)
+      localStorage.setItem('userName', res.name)
       router.push('/')
     }
   } else {
