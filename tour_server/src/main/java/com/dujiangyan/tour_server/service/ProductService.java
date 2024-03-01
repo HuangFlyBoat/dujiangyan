@@ -29,4 +29,11 @@ public interface ProductService {
      * @param productId 土特产id
      */
     int deleteProductAndSpe(int productId);
+
+
+    /**
+     * 编辑土特产
+     * @param product 土特产信息
+     */
+    Product editProductWithSpe(Product product);
 }

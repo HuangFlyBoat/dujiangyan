@@ -41,14 +41,21 @@ public class ProductController {
     }
 
     @PostMapping("/delete")
-    public BaseResponse addProduct(@RequestBody Product product) {
+    public BaseResponse deleteProduct(@RequestBody Product product) {
         int result = productService.deleteProductAndSpe(product.getId());
         if (result == -1) {
             return ResultUtils.error(ErrorCode.EDIT_ERROR);
         } else {
             return ResultUtils.success(ErrorCode.SUCCESS);
         }
-
     }
+
+    @PostMapping("/edit")
+    public BaseResponse editProduct(@RequestBody Product product) {
+        Product product1 = productService.editProductWithSpe(product);
+        return ResultUtils.success(product1);
+    }
+
+
 
 }

@@ -2,6 +2,7 @@ package com.dujiangyan.tour_server.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,11 +29,11 @@ public class Product {
     @Column(name = "detailImg")
     private String detailImg;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "product")
     private List<Cart> carts;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Spe> speList;
-
-
 }

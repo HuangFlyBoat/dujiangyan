@@ -22,10 +22,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         // 允许跨域请求的路径
-        registry.addMapping("/**")
-                .allowedOrigins("*") // 允许所有源，或者替换为具体的域名，例如"http://example.com"
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 允许的HTTP方法
-                .allowCredentials(true) // 是否允许发送Cookie信息
-                .maxAge(3600); // 预检请求的缓存时间（秒），在这段时间内，对于相同的跨域请求将不再进行预检
+        registry.addMapping("/**") // 所有接口
+                .allowCredentials(true) // 是否发送 Cookie
+                .allowedOriginPatterns("*") // 支持域
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // 支持方法
+                .allowedHeaders("*")
+                .exposedHeaders("*");
     }
 }

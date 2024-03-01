@@ -52,6 +52,9 @@ public class ProductServiceImpl implements ProductService {
         List<String> speNames = productAddRequest.getSpeName();
         Product product = new Product();
         product.setName(productAddRequest.getName());
+        product.setImg(productAddRequest.getImg());
+        product.setPrice(productAddRequest.getPrice());
+        product.setDetailImg(productAddRequest.getDetailImg());
         if (speNames != null && !speNames.isEmpty()) {
             List<Spe> speList = new ArrayList<>();
             for (String speName : speNames) {
@@ -81,4 +84,36 @@ public class ProductServiceImpl implements ProductService {
             return -1;
         }
     }
+
+        @Override
+        @Transactional
+        public Product editProductWithSpe(Product newProduct) {
+            Optional<Product> oldProductOpt = productRepository.findById(newProduct.getId());
+
+            if (oldProductOpt.isPresent()) {
+                Product oldProduct = oldProductOpt.get();
+
+                if (newProduct.getName() != null) {
+                    oldProduct.setName(newProduct.getName());
+                }
+
+                if (newProduct.getImg() != null) {
+                    oldProduct.setImg(newProduct.getImg());
+                }
+
+                if (newProduct.getPrice() != null) {
+                    oldProduct.setPrice(newProduct.getPrice());
+                }
+
+                if (newProduct.getDetailImg() != null) {
+                    oldProduct.setDetailImg(newProduct.getDetailImg());
+                }
+
+                // 在这里添加其他字段的检查和更新
+
+                return productRepository.save(oldProduct);
+            } else {
+                throw new RuntimeException("Product not found with id " + newProduct.getId());
+            }
+        }
 }
