@@ -63,7 +63,7 @@ const onSubmit = async ({ validateResult, firstError }) => {
   if (validateResult === true) {
     const res = await loginService({ ...formData })
     console.log('resres', res)
-    if (res.isAdmin !== 1) {
+    if (res.name !== 'admin') {
       MessagePlugin.warning('登录失败，权限不足')
     } else {
       MessagePlugin.success('登录成功')

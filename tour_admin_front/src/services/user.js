@@ -1,9 +1,9 @@
 import http from '@/axios/index.js'
 import { MessagePlugin } from 'tdesign-vue-next'
 
-const loginService = async ({ userName, password }) => {
+const loginService = async ({ name, password }) => {
   try {
-    const { data } = await http.post('/admin/login', { userName, password })
+    const { data } = await http.post('/admin/login', { name, password })
     return data
   } catch (error) {
     MessagePlugin.error(`登录失败,${error}`)
