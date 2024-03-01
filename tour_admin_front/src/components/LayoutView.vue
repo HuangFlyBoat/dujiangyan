@@ -1,6 +1,5 @@
 <template>
   <div class="main-layout">
-    <t-layout>
       <t-layout>
         <t-aside style="border-top: 1px solid var(--component-border);height: 100vh;overflow: hidden;">
           <div style="display: flex;">
@@ -31,11 +30,10 @@
             </t-menu-item>
           </t-menu>
         </t-aside>
-        <t-layout style="min-height: calc(100vh - 56px); padding: 6px">
+        <div style="width: 85%;">
           <router-view></router-view>
-        </t-layout>
+        </div>
       </t-layout>
-    </t-layout>
   </div>
 </template>
 

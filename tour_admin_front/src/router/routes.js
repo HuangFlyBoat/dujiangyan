@@ -1,6 +1,7 @@
 import LayoutView from '@/components/LayoutView.vue'
 import LoginView from '@/views/LoginView.vue'
-import ProductListView from '@/views/ProductList'
+import ProductListView from '@/views/ProductList.vue'
+import UserListView from '@/views/userList.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
         path: '/',
         name: 'home',
         component: ProductListView
+      },
+      {
+        path: '/user',
+        name: 'user',
+        component: UserListView
       }
     ]
   },

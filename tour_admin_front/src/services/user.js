@@ -7,7 +7,7 @@ const loginService = async ({ userName, password }) => {
     return data
   } catch (error) {
     MessagePlugin.error(`登录失败,${error}`)
-    return Promise.reject(error)
+    return Promise.resolve(error)
   }
 }
 
@@ -17,7 +17,7 @@ const allUserService = async () => {
     return data
   } catch (error) {
     MessagePlugin.error(`查找失败,${error}`)
-    return Promise.reject(error)
+    return Promise.resolve(error)
   }
 }
 

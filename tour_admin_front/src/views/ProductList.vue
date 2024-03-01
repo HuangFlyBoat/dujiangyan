@@ -229,6 +229,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 .main {
   width: 100%;
-  margin: 0 auto;
+  padding: 10px;
 }
 </style>
