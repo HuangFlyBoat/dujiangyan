@@ -1,6 +1,6 @@
 package com.dujiangyan.tour_server.service.impl;
 
-import com.dujiangyan.tour_server.service.repository.AddressRepository;
+import com.dujiangyan.tour_server.repository.AddressRepository;
 import com.dujiangyan.tour_server.service.AddressService;
 import org.springframework.stereotype.Service;
 

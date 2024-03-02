@@ -4,7 +4,7 @@ import com.dujiangyan.tour_server.domain.LoginInfo;
 import com.dujiangyan.tour_server.domain.UserRegisterRequest;
 import com.dujiangyan.tour_server.entity.User;
 import com.dujiangyan.tour_server.service.UserService;
-import com.dujiangyan.tour_server.service.repository.UserRepository;
+import com.dujiangyan.tour_server.repository.UserRepository;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
