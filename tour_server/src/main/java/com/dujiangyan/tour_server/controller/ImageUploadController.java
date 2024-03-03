@@ -6,10 +6,7 @@ import com.dujiangyan.tour_server.common.ResultUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -17,7 +14,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/file")
 public class ImageUploadController {
-
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/image")
     public BaseResponse uploadImage(@RequestParam("image") MultipartFile file) {
         if (file.isEmpty()) {

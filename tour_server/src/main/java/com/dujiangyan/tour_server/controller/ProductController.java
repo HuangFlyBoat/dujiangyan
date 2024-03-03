@@ -41,6 +41,7 @@ public class ProductController {
         return ResultUtils.success(result);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/delete")
     public BaseResponse deleteProduct(@RequestBody Product product) {
         int result = productService.deleteProductAndSpe(product.getId());

@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(passwordEncoder.encode(password));  // 加密密码
         newUser.setPhone(userRegisterRequest.getPhone());
         newUser.setEmail(userRegisterRequest.getEmail());
+        newUser.setGender(userRegisterRequest.getGender());
         return userRepository.save(newUser);
 
 
