@@ -135,6 +135,7 @@ const getOptions = async () => {
       value: item.id
     }
   })
+  addressId.value = addressOptions?.value[0]?.value || 0
 }
 
 const createOrder = async () => {
