@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" v-loading="!isReady">
     <div class="detail">
       <div class="img" data-v-2a07f562="">
         <img
@@ -19,7 +19,7 @@
           <div class="title">类型选择</div>
           <el-radio-group v-model="speId">
             <el-radio v-for="item in itemInfo.speList" :key="item.speId" style="padding: 24px 0;"
-              :label="item.name"
+              :label="item.speId" :value="item.speId"
             >
               <div class="extra">{{ item.name }}</div>
             </el-radio>
@@ -28,7 +28,7 @@
         <div class="base-card info-item">
           <el-input-number v-model="num" :min="1" />
           <el-space size="large">
-            <el-button :loading="isLoading" @click="onAddCart" style="margin-left: 10px;" round>加入购物车</el-button>
+            <el-button :loading="isLoading" @click="onAddCart" style="margin-left: 10px;" type="primary" round>加入购物车</el-button>
           </el-space>
         </div>
       </div>
@@ -52,11 +52,15 @@ const itemInfo = ref({})
 const id = route.params.id
 const num = ref(1)
 const speId = ref(0)
+const isReady = ref(false)
 
 const onAddCart = async () => {
   isLoading.value = true
-  await updateCart(speId.value, itemInfo.value.productId, num.value)
-  ElMessage.success('新增成功')
+  const res = await updateCart(speId.value, itemInfo.value.id, num.value)
+  if (res) {
+    ElMessage.success('新增成功')
+  }
+
   isLoading.value = false
 }
 
@@ -64,6 +68,7 @@ onMounted(async () => {
   const res = await getDetail(id)
   itemInfo.value = res
   speId.value = res.speList[0].speId
+  isReady.value = true
 })
 </script>
 

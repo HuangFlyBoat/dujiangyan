@@ -29,7 +29,7 @@
     </div>
     <div class="bottom">
       <div class="bottom-left">
-        <el-checkbox @click="onCahngeAll" :value="isAll" label="全选" size="large" />
+        <el-checkbox @change="onCahngeAll" v-model="isAll" label="全选" size="large" />
         <el-button type="text" >清空购物车</el-button>
         <span>已选择{{ `${totalChecked}` }}件</span>
       </div>
@@ -41,7 +41,6 @@
       </div>
     </div>
     <el-dialog
-      @close="close"
       v-model="dialogVisible"
       width="350"
       :close-on-click-modal="false"
@@ -101,7 +100,6 @@ const totalChecked = computed(() => {
 })
 
 const onCheck = item => {
-  item.checked = !item.checked
   const filterList = list.value.filter(item => item.checked)
   if (filterList.length === list.value.length) {
     isAll.value = true
@@ -110,8 +108,8 @@ const onCheck = item => {
   }
 }
 
-const onCahngeAll = () => {
-  isAll.value = !isAll.value
+const onCahngeAll = (v) => {
+  console.log(isAll.value)
   list.value.forEach(item => {
     isAll.value ? item.checked = true : item.checked = false
   })
