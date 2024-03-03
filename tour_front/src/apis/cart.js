@@ -13,11 +13,11 @@ const getCartList = async () => {
 
 const updateCart = async (speId, productId, number) => {
   try {
-    const { data } = await http.post(`/cart/updateCart?speId=${speId}&productId=${productId}`, { number })
-    return data
+    await http.post(`/cart/updateCart?speId=${speId}&productId=${productId}`, { number })
+    return 1
   } catch (error) {
     ElMessage.error(`更新失败,${error}`)
-    return Promise.resolve({})
+    return Promise.resolve(0)
   }
 }
 
