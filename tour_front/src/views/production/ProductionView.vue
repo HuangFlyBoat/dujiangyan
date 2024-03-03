@@ -17,7 +17,7 @@
         </div>
         <div class="base-card info-item">
           <div class="title">类型选择</div>
-          <el-radio-group v-model="radio2">
+          <el-radio-group v-model="speId">
             <el-radio v-for="item in itemInfo.speList" :key="item.speId" style="padding: 24px 0;"
               :label="item.name"
             >
@@ -28,8 +28,7 @@
         <div class="base-card info-item">
           <el-input-number v-model="num" :min="1" />
           <el-space size="large">
-            <el-button type="warning" style="margin-left: 15px;" round>点击购买</el-button>
-            <el-button round>加入购物车</el-button>
+            <el-button :loading="isLoading" @click="onAddCart" style="margin-left: 10px;" round>加入购物车</el-button>
           </el-space>
         </div>
       </div>
@@ -44,15 +43,27 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { getDetail } from '@/apis/product.js'
+import { updateCart } from '@/apis/cart.js'
+import { ElMessage } from 'element-plus'
 
 const route = useRoute()
+const isLoading = ref(false)
 const itemInfo = ref({})
 const id = route.params.id
 const num = ref(1)
-const radio2 = ref('2')
+const speId = ref(0)
+
+const onAddCart = async () => {
+  isLoading.value = true
+  await updateCart(speId.value, itemInfo.value.productId, num.value)
+  ElMessage.success('新增成功')
+  isLoading.value = false
+}
+
 onMounted(async () => {
   const res = await getDetail(id)
   itemInfo.value = res
+  speId.value = res.speList[0].speId
 })
 </script>
 
