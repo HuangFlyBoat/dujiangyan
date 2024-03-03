@@ -44,20 +44,19 @@
             theme="image"
             accept="image/*"
             @success="onImg"
-            :action="actionURL"
+            :request-method="requestMethod"
           />
         </t-form-item>
 
         <t-form-item label="土特产价格" name="price">
           <t-input
-            :sizeLimit="{ size: 1, unit: 'MB', message: '图片大小不超过1MB' }"
             v-model="formData.price"
             placeholder="请输入土特产价格"
           ></t-input>
         </t-form-item>
 
-        <t-form-item label="土特产长图" name="detailImg">
-          <t-upload theme="image" accept="image/*" @success="ondetailImg" :action="actionURL" />
+        <t-form-item  label="土特产长图" name="detailImg">
+          <t-upload theme="image" accept="image/*" @success="ondetailImg" :request-method="requestMethod" />
         </t-form-item>
 
         <t-form-item v-if="currentDialogType==='new'" label="规格" name="speName">
@@ -78,10 +77,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { MessagePlugin } from 'tdesign-vue-next'
-
+import http from '@/axios/index.js'
 import { getProductList, deleteProduct, addProduct, editProduct } from '@/services/product'
-
-const actionURL = 'http://localhost:8888/file/image'
 
 const columns = ref([
   {
@@ -145,6 +142,14 @@ const handleDelete = async row => {
   await deleteProduct(row.id)
   await load(currentPage)
   MessagePlugin.success('删除成功')
+}
+
+const requestMethod = async (file) => {
+  const form = new FormData()
+  form.append('image', file)
+  const res = await http.post('/file/image', form)
+  console.log(res)
+  return ({ status: 'success', response: { url: 'https://tdesign.gtimg.com/site/avatar.jpg' } })
 }
 
 const load = async () => {
