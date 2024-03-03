@@ -22,9 +22,9 @@
           >
         </div>
         <div class="header-navigation-item">
-          <router-link to="/local-produce" class="" @click="handleNavClick('goods')"
+          <router-link to="/local-produce" class="" @click="handleNavClick('local-produce')"
             ><div class="text-label">
-              <div :class="isActive('goods') ? 'showLine' : ''" class="title">特产商城</div>
+              <div :class="isActive('local-produce') ? 'showLine' : ''" class="title">特产商城</div>
             </div></router-link
           >
         </div>
@@ -35,12 +35,25 @@
             </div></router-link
           >
         </div>
-        <div class="header-navigation-item">
+        <div v-if="!isLogin" class="header-navigation-item">
           <router-link to="/login" @click="handleNavClick('login')">
             <div class="text-label">
               <div :class="isActive('login') ? 'showLine' : ''" class="title" title="">登录/注册</div>
             </div>
           </router-link>
+        </div>
+        <div v-if="isLogin" class="header-navigation-item">
+          <router-link to="/address" @click="handleNavClick('address')">
+            <div class="text-label">
+              <div :class="isActive('address') ? 'showLine' : ''" class="title" title="">我的地址</div>
+            </div>
+          </router-link>
+        </div>
+        <div v-if="isLogin" class="header-navigation-item">
+            <div style="cursor:auto;" class="text-label">
+              <span style="padding-bottom: 5px;color: white;" text>{{ userName }}</span>
+              <el-link @click="loginOut">退出登录</el-link>
+            </div>
         </div>
       </div>
     </div>
@@ -48,9 +61,39 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const routePath = ref('#')
+const router = useRouter()
+const route = useRoute()
+
+const isLogin = ref(!!localStorage.getItem('userName'))
+const userName = localStorage.getItem('userName')
+
+const loginOut = () => {
+  isLogin.value = false
+  router.push('/')
+}
+
+watch(
+  () => localStorage.getItem('userName'),
+  () => {
+    isLogin.value = !!localStorage.getItem('userName')
+  },
+  { immediate: true }
+)
+
+watch(
+  () => route.path,
+  () => {
+    const name = route.path.split('/')[1]
+    if (name === '') {
+      routePath.value = '#'
+    } else routePath.value = name
+  },
+  { immediate: true }
+)
 
 function handleNavClick (url) {
   routePath.value = url

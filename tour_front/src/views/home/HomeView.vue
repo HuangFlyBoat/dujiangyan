@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="right">
-        <el-carousel trigger="click" :interval="4000" type="card" height="700px">
+        <el-carousel v-loading="loadingHot" trigger="click" :interval="4000" type="card" height="700px">
           <el-carousel-item v-for="item in goodsImgList" :key="item">
             <img style="width: 100%;" :src="item.detailImg" alt="">
           </el-carousel-item>
@@ -52,7 +52,8 @@
         <p class="title">Popular attractions</p>
       </div>
       <div class="list">
-        <div class="grid-container">
+
+        <div v-loading="loadingAttr" class="grid-container">
           <div v-for="item in attrList" :key="item.title" class="grid-item">
             <div class="top-bg">
               <el-carousel :autoplay="false" height="300px">
@@ -97,16 +98,30 @@ import o2 from '../../assets/home/outline/o2.png'
 const goodsImgList = ref([])
 const outlineImg = [o1, o2]
 const attrList = ref([])
+const loadingHot = ref(false)
+const loadingAttr = ref(false)
 
 const rateValue = ref(4)
 const desc = '都江堰是中国四川省的一个著名旅游景点，被誉为世界文化遗产。它以其古老而壮丽的水利工程而闻名，这个工程已有两千多年的历史。都江堰也是中国四大名著《西游记》中的重要地点之一。这里拥有壮丽的山水景观、悠久的历史文化和丰富的民俗风情，吸引着来自世界各地的游客。'
 const descEn = 'Dujiangyan is a famous tourist attraction in Sichuan, China, known as a UNESCO World Heritage site. It is renowned for its ancient and magnificent irrigation system, which has a history of over two thousand years. Dujiangyan is also an important location mentioned in one of China\'s four great classic novels, "Journey to the West." The area boasts splendid natural landscapes, rich historical and cultural heritage, and vibrant local customs, attracting visitors from around the world.'
 
-onMounted(async () => {
+const getAttraction = async () => {
+  loadingAttr.value = true
   const res = await getAttractionList()
-  const data = await getProductList()
-  goodsImgList.value = data.slice(0, 3)
+  loadingAttr.value = false
   attrList.value = res
+}
+
+const getHot = async () => {
+  loadingHot.value = true
+  const data = await getProductList()
+  loadingHot.value = false
+  goodsImgList.value = data.slice(0, 3)
+}
+
+onMounted(() => {
+  getAttraction()
+  getHot()
 })
 
 </script>
