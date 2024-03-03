@@ -32,7 +32,7 @@
         showPreviousAndNextBtn
       />
     </t-card>
-    <t-dialog v-model:visible="visible" header="新增土特产" width="40%" :on-close="onReset" :footer="false">
+    <t-dialog v-model:visible="visible" :header="currentDialogType==='new' ? '新增土特产' : '更新土特产'" width="40%" :on-close="onReset" :footer="false">
       <t-form ref="form" :rules="rules" :data="formData" :colon="true" @reset="onReset" @submit="onSubmit">
         <t-form-item label="土特产名称" name="name">
           <t-input v-model="formData.name" placeholder="请输入土特产名称"></t-input>
@@ -61,7 +61,7 @@
         </t-form-item>
 
         <t-form-item v-if="currentDialogType==='new'" label="规格" name="speName">
-          <t-input v-model="formData.speName" placeholder="请输入土特产保质期时间（多个规格逗号隔开）"></t-input>
+          <t-input v-model="formData.speName" placeholder="请输入规格（多个规格逗号隔开）"></t-input>
         </t-form-item>
 
         <t-form-item>
