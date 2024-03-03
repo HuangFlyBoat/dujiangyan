@@ -21,4 +21,12 @@ public class Detail {
 
     @Column(name = "number")
     private int number;
+
+    @Column(name = "speId")
+    private int speId;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orderId", insertable = false, updatable = false)
+    private Order order;
 }
