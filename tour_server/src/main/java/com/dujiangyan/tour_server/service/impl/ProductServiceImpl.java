@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -25,9 +26,23 @@ public class ProductServiceImpl implements ProductService {
     private SpeRepository speRepository;
 
 
+    @Transactional(readOnly = true)
     @Override
-    public List<Product> getProductList() {
-        return productRepository.findAll();
+    public List<ProductDTO> getProductList() {
+        // 查询所有产品
+        List<Product> products = productRepository.findAll();
+
+        // 将Product实体转换为ProductDTO
+        return products.stream().map(product -> {
+            ProductDTO dto = new ProductDTO();
+            dto.setId(product.getId());
+            dto.setName(product.getName());
+            dto.setImg(product.getImg());
+            dto.setPrice(product.getPrice());
+            dto.setDetailImg(product.getDetailImg());
+            // 根据需要添加更多字段的映射
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     public ProductDTO convertToDTO(Product product) {

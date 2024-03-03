@@ -22,7 +22,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/getProductList")
-    public BaseResponse<List<Product>> getProductList() {
+    public BaseResponse<List<ProductDTO>> getProductList() {
         return ResultUtils.success(productService.getProductList());
     }
 

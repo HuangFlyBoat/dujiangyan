@@ -11,7 +11,7 @@ public interface ProductService {
     /**
      * 获取土特产列表
      **/
-    List<Product> getProductList();
+    List<ProductDTO> getProductList();
 
     /**
      * 根据id获取土特产
