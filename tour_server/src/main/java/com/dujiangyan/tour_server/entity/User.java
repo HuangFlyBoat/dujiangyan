@@ -24,4 +24,7 @@ public class User {
 
     @Column(name = "phone")
     private String phone;
+
+    @Column(name = "gender")
+    private Integer gender;
 }
