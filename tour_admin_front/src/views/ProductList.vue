@@ -146,10 +146,9 @@ const handleDelete = async row => {
 
 const requestMethod = async (file) => {
   const form = new FormData()
-  form.append('image', file)
+  form.append('image', file.raw)
   const res = await http.post('/file/image', form)
-  console.log(res)
-  return ({ status: 'success', response: { url: 'https://tdesign.gtimg.com/site/avatar.jpg' } })
+  return { status: 'success', response: { url: 'data:image/png;base64,' + res.data } }
 }
 
 const load = async () => {
@@ -197,12 +196,12 @@ const handlePageChange = async newPage => {
 
 const ondetailImg = ({ response }) => {
   console.log(response)
-  formData.value.detailImg = response.data.url
+  formData.value.detailImg = response.url
 }
 
 const onImg = ({ response }) => {
   console.log(response)
-  formData.value.img = response.data.url
+  formData.value.img = response.url
 }
 
 const onOpenDialog = (type, item) => {

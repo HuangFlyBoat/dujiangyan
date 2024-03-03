@@ -9,7 +9,7 @@
     <div class="list ml mr">
       <p style="margin-top: 30px" class="title">热门商品</p>
       <p class="title">Popular Productions</p>
-      <div class="grid-container">
+      <div class="grid-container" v-loading="isLoading">
         <el-card
           shadow="hover"
           @click="handleClick(item)"
@@ -39,15 +39,25 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { getProductList } from '@/apis/product.js'
 
 const router = useRouter()
 const list = ref([])
+const isLoading = ref(false)
 
 const handleClick = (item) => {
   router.push(`/local-produce/goods/${item.id}`)
 }
+
+onMounted(async () => {
+  isLoading.value = true
+  const res = await getProductList()
+  list.value = res
+  isLoading.value = false
+})
+
 </script>
 
 <style lang="scss" scoped>

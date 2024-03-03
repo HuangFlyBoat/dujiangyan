@@ -72,6 +72,7 @@ const isLogin = ref(!!localStorage.getItem('userName'))
 const userName = localStorage.getItem('userName')
 
 const loginOut = () => {
+  localStorage.clear()
   isLogin.value = false
   router.push('/')
 }

@@ -72,11 +72,9 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
 import { login, register } from '@/apis/login.js'
 import { ElMessage } from 'element-plus'
 
-const router = useRouter()
 const activeName = ref('first')
 const form = ref({
   userName: '',
@@ -135,7 +133,8 @@ const onSubmitLogin = async () => {
   isLoading.value = false
   ElMessage.success('登录成功')
   localStorage.setItem('userName', res.userName)
-  router.replace('/')
+  localStorage.setItem('userId', res.userId)
+  location.replace('/')
 }
 </script>
 

@@ -24,7 +24,7 @@
       <div class="right">
         <el-carousel v-loading="loadingHot" trigger="click" :interval="4000" type="card" height="700px">
           <el-carousel-item v-for="item in goodsImgList" :key="item">
-            <img style="width: 100%;" :src="item.detailImg" alt="">
+            <img style="width: 100%;" :src="item.img" alt="">
           </el-carousel-item>
         </el-carousel>
       </div>

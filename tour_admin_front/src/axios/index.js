@@ -19,12 +19,12 @@ service.interceptors.response.use(
   error => {
     console.log('接口信息报错', error)
     const res = error?.response?.data
-    if (res.code === 40100) {
+    if (res?.code === 40100) {
       MessagePlugin.warning('请登录')
       location.replace('/login')
       return Promise.resolve()
     }
-    return Promise.reject(error)
+    return Promise.resolve({ data: {} })
   }
 )
 

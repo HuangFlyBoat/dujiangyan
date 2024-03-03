@@ -41,12 +41,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { getDetail } from '@/apis/product.js'
 
+const route = useRoute()
 const itemInfo = ref({})
-
+const id = route.params.id
 const num = ref(1)
 const radio2 = ref('2')
+onMounted(async () => {
+  const res = await getDetail(id)
+  itemInfo.value = res
+})
 </script>
 
 <style lang="scss" scoped>

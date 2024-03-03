@@ -11,9 +11,9 @@ const getProductList = async () => {
   }
 }
 
-const getDetail = async () => {
+const getDetail = async (id) => {
   try {
-    const { data } = await http.get('/product/getDetail')
+    const { data } = await http.get(`/product/getDetail?id=${id}`)
     return data
   } catch (error) {
     ElMessage.error(`获取土特产失败,${error}`)

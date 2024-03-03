@@ -94,7 +94,7 @@ const onCahngeAll = () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 66px;
+  margin-top: 90px;
   width: 100%;
   .attr-name{
     width: 80%;
