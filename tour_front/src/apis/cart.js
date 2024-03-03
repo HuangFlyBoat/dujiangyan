@@ -1,24 +1,24 @@
 import http from '@/http/index.js'
 import { ElMessage } from 'element-plus'
 
-const login = async ({ userName, password }) => {
+const getCartList = async () => {
   try {
-    const { data } = await http.post('/user/login', { userName, password })
+    const { data } = await http.get('/cart/getCartList')
     return data
   } catch (error) {
-    ElMessage.error(`登录失败,${error}`)
-    return Promise.reject(error)
+    ElMessage.error('获取购物车失败')
+    return Promise.resolve([])
   }
 }
 
-const register = async (formData) => {
+const updateCart = async (speId, productId, number) => {
   try {
-    const { data } = await http.post('/user/register', formData)
+    const { data } = await http.post(`/cart/updateCart?speId=${speId}&productId=${productId}`, { number })
     return data
   } catch (error) {
-    ElMessage.error(`注册失败,${error}`)
-    return Promise.reject(error)
+    ElMessage.error(`更新失败,${error}`)
+    return Promise.resolve({})
   }
 }
 
-export { register, login }
+export { updateCart, getCartList }

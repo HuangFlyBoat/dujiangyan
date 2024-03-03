@@ -6,11 +6,11 @@
       <div style="width: 260px;padding-left: 200px;">数量</div>
       <div style="width: 220px;padding-left: 180px;">小计</div>
     </div>
-    <div class="list">
+    <div class="list" v-loading="isLoading">
       <div class="card" v-for="item in list" :key="item">
         <el-card shadow="never">
           <div class="card-item">
-            <el-checkbox v-model="item.checked"  size="large" />
+            <el-checkbox @change="onCheck(item)" v-model="item.checked" size="large" />
             <div class="img-box">
               <img style="width: 100%; height:100%" :src="item.productImg" alt="">
             </div>
@@ -20,7 +20,7 @@
             </div>
             <p class="price">￥{{ item.productPrice }}</p>
             <div class="number">
-              <el-input-number @change="onNumberChange" v-model="item.number"/>
+              <el-input-number :min="0" @change="(value)=> onNumberChange(item,value)" v-model="item.number"/>
             </div>
             <p class="total">￥{{ item.productPrice * item.number }}</p>
           </div>
@@ -36,18 +36,55 @@
       <div class="bottom-right">
         <span>总价：</span>
         <span>￥{{ total }}</span>
-        <el-button type="primary" style="margin-left: 15px">结算</el-button>
+        <el-button :disabled="total === 0"
+          @click="dialogVisible = true" type="primary" style="margin-left: 15px">结算</el-button>
       </div>
     </div>
+    <el-dialog
+      @close="close"
+      v-model="dialogVisible"
+      width="350"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+    >
+        <div style="display: flex; align-items: center">
+          <el-select
+          v-model="addressId"
+          placeholder="请选择地址"
+          size="large"
+          style="width: 240px"
+        >
+            <el-option
+              v-for="item in addressOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </div>
+
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="primary" :loading="isSubmitLoading" @click="createOrder"> 确认结算 </el-button>
+        </div>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { updateCart, getCartList } from '@/apis/cart.js'
+import { getAll } from '@/apis/address.js'
+import { ElMessage } from 'element-plus'
 
 const list = ref([])
 const isAll = ref(false)
-
+const isLoading = ref(false)
+const isSubmitLoading = ref(false)
+const dialogVisible = ref(false)
+const addressId = ref(0)
+const addressOptions = ref([])
 const total = computed(() => {
   let total = 0
   const filterList = list.value.filter((item) => item.checked)
@@ -63,21 +100,15 @@ const totalChecked = computed(() => {
   return filterList.length
 })
 
-const onNumberChange = (number) => {
-  console.log(number)
+const onCheck = item => {
+  item.checked = !item.checked
+  const filterList = list.value.filter(item => item.checked)
+  if (filterList.length === list.value.length) {
+    isAll.value = true
+  } else {
+    isAll.value = false
+  }
 }
-
-watch(list.value, () => {
-  let flag = false
-  list.value.forEach((item) => {
-    if (!item.checked) {
-      flag = true
-    }
-  })
-
-  flag ? isAll.value = false : isAll.value = true
-  console.log(isAll.value)
-})
 
 const onCahngeAll = () => {
   isAll.value = !isAll.value
@@ -85,6 +116,53 @@ const onCahngeAll = () => {
     isAll.value ? item.checked = true : item.checked = false
   })
 }
+
+const onNumberChange = async (item, value) => {
+  await updateCart(item.speId, item.productId, value)
+  load()
+}
+
+const load = async () => {
+  isLoading.value = true
+  const res = await getCartList()
+  list.value = res
+  isLoading.value = false
+}
+
+const getOptions = async () => {
+  const res = await getAll()
+  addressOptions.value = res.map(item => {
+    return {
+      label: `姓名：${item.name},地址：${item.place},电话：${item.tel}`,
+      value: item.id
+    }
+  })
+}
+
+const createOrder = async () => {
+  if (addressId.value === 0) {
+    ElMessage.warning('请选择地址')
+    return
+  }
+  const params = {
+    addressId: addressId.value,
+    cartItems: list.value.filter(item => item.checked)
+  }
+  params.cartItems.forEach((item) => {
+    delete item.checked
+  })
+  isSubmitLoading.value = true
+  isSubmitLoading.value = false
+  load()
+  ElMessage.success('支付成功')
+  addressId.value = 0
+  dialogVisible.value = false
+}
+
+onMounted(() => {
+  load()
+  getOptions()
+})
 
 </script>
 

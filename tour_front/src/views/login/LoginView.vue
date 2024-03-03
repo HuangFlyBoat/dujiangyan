@@ -84,7 +84,6 @@ const form = ref({
   email: '',
   phone: ''
 })
-const isLoading = ref(false)
 
 const rules = reactive({
   userName: [
@@ -104,6 +103,8 @@ const rules = reactive({
     { min: 3, max: 20, message: '长度控制在3-20以内', trigger: 'blur' }
   ]
 })
+
+const isLoading = ref(false)
 
 const handleClick = (tab) => {
   if (activeName.value !== tab.paneName) {
