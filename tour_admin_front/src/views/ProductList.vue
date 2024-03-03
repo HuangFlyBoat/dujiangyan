@@ -146,9 +146,10 @@ const handleDelete = async row => {
 
 const requestMethod = async (file) => {
   const form = new FormData()
-  form.append('image', file.raw)
+  form.append('file', file.raw)
   const res = await http.post('/file/image', form)
-  return { status: 'success', response: { url: 'data:image/png;base64,' + res.data } }
+  console.log('🚀 ~ file:ProductList method:requestMethod line:151 -----res:', res)
+  return { status: 'success', response: { url: res.data.url } }
 }
 
 const load = async () => {
