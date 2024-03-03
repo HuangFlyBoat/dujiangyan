@@ -25,7 +25,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             "/admin/login",
             "/product/getProductList",
             "/product/getDetail",
-            "file/image"
+            "file/image",
+            "/delete"
     ));
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
