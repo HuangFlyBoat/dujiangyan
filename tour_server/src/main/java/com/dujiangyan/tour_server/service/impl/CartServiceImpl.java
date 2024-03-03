@@ -56,7 +56,7 @@ public class CartServiceImpl implements CartService {
             // 如果没有找到现有的记录，插入新的记录
             // 根据商品id和规格id查询响应对象
             Spe spe = speRepository.findById(speId)
-                    .orElseThrow(() -> new RuntimeException("Spe not found"));
+                    .orElseThrow(() -> new RuntimeException("SpeDTO not found"));
             Product product = productRepository.findById(productId)
                     .orElseThrow(() -> new RuntimeException("Product not found"));
 
