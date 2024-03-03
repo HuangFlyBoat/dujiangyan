@@ -19,7 +19,7 @@
                 />
               </el-form-item>
               <el-form-item>
-                <el-button style="width: 100%" type="primary" @click="onSubmit"
+                <el-button :loading="isLoading" style="width: 100%" type="primary" @click="onSubmitLogin"
                   >登录</el-button
                 >
               </el-form-item>
@@ -49,17 +49,17 @@
                 <el-input
                   type="password"
                   autocomplete="off"
-                  v-model="form.password"
+                  v-model="form.password2"
                 />
               </el-form-item>
               <el-form-item label="性别">
                 <el-radio-group v-model="form.userSex">
-                  <el-radio label="男" />
-                  <el-radio label="女" />
+                  <el-radio label="男" :value="0" />
+                  <el-radio label="女" :value="0" />
                 </el-radio-group>
               </el-form-item>
               <el-form-item>
-                <el-button style="width: 100%" type="primary" @click="onSubmit"
+                <el-button :loading="isLoading" style="width: 100%" type="primary" @click="onSubmitRegister"
                   >注册</el-button
                 >
               </el-form-item>
@@ -72,15 +72,21 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { login, register } from '@/apis/login.js'
+import { ElMessage } from 'element-plus'
 
+const router = useRouter()
 const activeName = ref('first')
 const form = ref({
   userName: '',
   password: '',
-  userSex: '男',
+  password2: '',
+  gender: 0,
   email: '',
   phone: ''
 })
+const isLoading = ref(false)
 
 const rules = reactive({
   userName: [
@@ -106,13 +112,30 @@ const handleClick = (tab) => {
     form.value = {
       userName: '',
       password: '',
-      userSex: '男'
+      password2: '',
+      gender: 0,
+      email: '',
+      phone: ''
     }
   }
 }
 
-const onSubmit = () => {
-  console.log('submit!')
+const onSubmitRegister = async () => {
+  console.log(form.value)
+  isLoading.value = true
+  await register(form.value)
+  isLoading.value = false
+  ElMessage.success('注册成功')
+  handleClick('first')
+}
+
+const onSubmitLogin = async () => {
+  isLoading.value = true
+  const res = await login(form.value)
+  isLoading.value = false
+  ElMessage.success('登录成功')
+  localStorage.setItem('userName', res.userName)
+  router.replace('/')
 }
 </script>
 
