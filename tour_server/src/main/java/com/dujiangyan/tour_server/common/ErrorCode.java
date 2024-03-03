@@ -13,6 +13,8 @@ public enum ErrorCode {
     LOGIN_ERROR(40003, "登录失败", ""),
     NO_AUTH(40101, "无权限", ""),
 
+    FILE_TOO_LARGE(40005, "文件过大", ""),
+
     EDIT_ERROR(40004, "编辑失败", ""),
     //屏蔽了所有的服务器的报错
     SYSTEM_ERROR(50000, "系统内部异常", "");

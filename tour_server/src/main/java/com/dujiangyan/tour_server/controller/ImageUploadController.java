@@ -17,8 +17,15 @@ public class ImageUploadController {
 
     @PostMapping("/image")
     public BaseResponse uploadImage(@RequestParam("image") MultipartFile file) {
+        long MAX_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+
         if (file.isEmpty()) {
             return ResultUtils.error(ErrorCode.NULL_ERROR);
+        }
+
+        if (file.getSize() > MAX_SIZE) {
+            // 文件太大，返回自定义错误
+            return ResultUtils.error(ErrorCode.FILE_TOO_LARGE); // 确保你有一个对应的错误码
         }
 
         try {
