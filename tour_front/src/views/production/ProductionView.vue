@@ -42,24 +42,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import g1 from '../../assets/home/goods/g1.png'
-import g1n from '../../assets/home/goods/g1n.png'
 
-const itemInfo =
-  {
-    id: 1,
-    name: '青城雪芽',
-    img: g1,
-    price: 32.5,
-    detailImg: g1n,
-    speList: [
-      {
-        speId: 1,
-        name: '青城雪芽53克*1袋',
-        productId: 1
-      }
-    ]
-  }
+const itemInfo = ref({})
 
 const num = ref(1)
 const radio2 = ref('2')

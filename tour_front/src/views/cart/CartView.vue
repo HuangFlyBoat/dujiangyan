@@ -44,48 +44,8 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-import g1 from '../../assets/home/goods/g1.png'
-import g2 from '../../assets/home/goods/g2.png'
-import g3 from '../../assets/home/goods/g3.png'
 
-const list = ref([
-  {
-    cartId: 1,
-    userId: 2,
-    number: 1,
-    productId: 1,
-    productName: '青城雪芽',
-    productImg: g1,
-    productPrice: 32.5,
-    productDetailImg: 'product2_detail.jpg',
-    speId: 1,
-    speName: '青城雪芽53克*1袋'
-  },
-  {
-    cartId: 1,
-    userId: 2,
-    number: 3,
-    productId: 2,
-    productName: '匠心腊味礼盒',
-    productImg: g2,
-    productPrice: 259,
-    productDetailImg: 'product2_detail.jpg',
-    speId: 2,
-    speName: '匠心腊味礼盒2520g'
-  },
-  {
-    cartId: 1,
-    userId: 2,
-    number: 1,
-    productId: 3,
-    productName: '李记乐宝酸菜粉丝',
-    productImg: g3,
-    productPrice: 29.9,
-    productDetailImg: 'product2_detail.jpg',
-    speId: 2,
-    speName: '李记乐宝酸菜粉丝160g*6桶'
-  }
-])
+const list = ref([])
 const isAll = ref(false)
 
 const total = computed(() => {

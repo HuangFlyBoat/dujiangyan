@@ -39,68 +39,11 @@
 </template>
 
 <script setup>
-import g1 from '../../assets/home/goods/g1.png'
-import g2 from '../../assets/home/goods/g2.png'
-import g3 from '../../assets/home/goods/g3.png'
-import g4 from '../../assets/home/goods/g4.png'
-import g5 from '../../assets/home/goods/g5.png'
-import g6 from '../../assets/home/goods/g6.png'
-import g7 from '../../assets/home/goods/g7.png'
-
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const list = [
-  {
-    id: 1,
-    name: '青城雪芽',
-    img: g1,
-    price: 32.5,
-    detailImg: 'product1_detail.jpg'
-  },
-  {
-    id: 2,
-    name: '匠心腊味礼盒',
-    img: g2,
-    price: 199,
-    detailImg: 'product2_detail.jpg'
-  },
-  {
-    id: 3,
-    name: '李记乐宝酸菜粉丝',
-    img: g3,
-    price: 29.9,
-    detailImg: 'product2_detail.jpg'
-  },
-  {
-    id: 4,
-    name: '红心猕猴桃',
-    img: g4,
-    price: 20,
-    detailImg: 'product2_detail.jpg'
-  },
-  {
-    id: 5,
-    name: '青城山飘雪',
-    img: g5,
-    price: 480,
-    detailImg: 'product2_detail.jpg'
-  },
-  {
-    id: 6,
-    name: '青梅酒',
-    img: g6,
-    price: 46,
-    detailImg: 'product2_detail.jpg'
-  },
-  {
-    id: 7,
-    name: '张三芝麻糕',
-    img: g7,
-    price: 29.9,
-    detailImg: 'product2_detail.jpg'
-  }
-]
+const list = ref([])
 
 const handleClick = (item) => {
   router.push(`/local-produce/goods/${item.id}`)
