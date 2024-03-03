@@ -42,16 +42,17 @@
     </div>
     <el-dialog
       v-model="dialogVisible"
-      width="350"
+      width="600"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
     >
         <div style="display: flex; align-items: center">
+          <span style="width: 90px;">地址选择：</span>
           <el-select
           v-model="addressId"
           placeholder="请选择地址"
           size="large"
-          style="width: 240px"
+          style="width: 500px"
         >
             <el-option
               v-for="item in addressOptions"
