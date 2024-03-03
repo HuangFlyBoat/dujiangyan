@@ -83,6 +83,7 @@ onMounted(async () => {
     align-items: center;
     .img {
       width: 500px;
+      height: 620px;
       flex-shrink: 0;
       .cover-img {
         width: 100%;

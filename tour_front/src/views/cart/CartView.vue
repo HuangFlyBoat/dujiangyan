@@ -20,7 +20,7 @@
             </div>
             <p class="price">￥{{ item.productPrice }}</p>
             <div class="number">
-              <el-input-number :min="0" @change="(value)=> onNumberChange(item,value)" v-model="item.number"/>
+              <el-input-number :min="0" @change="(value,oldValue)=> onNumberChange(item,value,oldValue)" v-model="item.number"/>
             </div>
             <p class="total">￥{{ item.productPrice * item.number }}</p>
           </div>
@@ -29,7 +29,7 @@
     </div>
     <div class="bottom">
       <div class="bottom-left">
-        <el-checkbox @change="onCahngeAll" v-model="isAll" label="全选" size="large" />
+        <el-checkbox @change="onChangeAll" v-model="isAll" label="全选" size="large" />
         <el-button type="text" >清空购物车</el-button>
         <span>已选择{{ `${totalChecked}` }}件</span>
       </div>
@@ -65,7 +65,7 @@
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" :loading="isSubmitLoading" @click="createOrder"> 确认结算 </el-button>
+          <el-button type="primary" :loading="isSubmitLoading" @click="onCreateOrder"> 确认结算 </el-button>
         </div>
       </template>
     </el-dialog>
@@ -75,6 +75,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { updateCart, getCartList } from '@/apis/cart.js'
+import { createOrder } from '@/apis/order.js'
 import { getAll } from '@/apis/address.js'
 import { ElMessage } from 'element-plus'
 
@@ -109,20 +110,28 @@ const onCheck = item => {
   }
 }
 
-const onCahngeAll = (v) => {
+const onChangeAll = (v) => {
   console.log(isAll.value)
   list.value.forEach(item => {
     isAll.value ? item.checked = true : item.checked = false
   })
 }
 
-const onNumberChange = async (item, value) => {
-  await updateCart(item.speId, item.productId, value)
-  load()
+const onNumberChange = async (item, value, oldValue) => {
+  let count = 1
+  if (value < oldValue) {
+    count = -1
+  }
+  await updateCart(item.speId, item.productId, count)
+  await load(true)
 }
 
-const load = async () => {
-  isLoading.value = true
+const load = async (noLoading) => {
+  if (noLoading) {
+    isLoading.value = false
+  } else {
+    isLoading.value = true
+  }
   const res = await getCartList()
   list.value = res
   isLoading.value = false
@@ -139,20 +148,21 @@ const getOptions = async () => {
   addressId.value = addressOptions?.value[0]?.value || 0
 }
 
-const createOrder = async () => {
+const onCreateOrder = async () => {
   if (addressId.value === 0) {
     ElMessage.warning('请选择地址')
     return
   }
-  const params = {
-    addressId: addressId.value,
-    cartItems: list.value.filter(item => item.checked)
-  }
-  params.cartItems.forEach((item) => {
+  const params = list.value.filter(item => item.checked)
+  params.forEach((item) => {
     delete item.checked
   })
   isSubmitLoading.value = true
+  const res = await createOrder(addressId.value, { cartInfos: params })
   isSubmitLoading.value = false
+  if (!res) {
+    return
+  }
   load()
   ElMessage.success('支付成功')
   addressId.value = 0
