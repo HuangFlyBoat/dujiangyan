@@ -2,6 +2,8 @@ package com.dujiangyan.tour_server.repository;
 
 import com.dujiangyan.tour_server.domain.CartInfo;
 import com.dujiangyan.tour_server.entity.Cart;
+import com.dujiangyan.tour_server.entity.Product;
+import com.dujiangyan.tour_server.entity.Spe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,7 +23,8 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     List<CartInfo> getCartList(@Param("userId") Integer userId);
 
 
-    Cart findCartByUserIdAndProduct_IdAndSpe_SpeId(Integer userId, Integer productId, Integer speId);
+    Cart findCartByUserIdAndProductAndSpe(Integer userId, Product product, Spe spe);
+
 
 
 }

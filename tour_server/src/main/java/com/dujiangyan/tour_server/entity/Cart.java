@@ -13,6 +13,7 @@ public class Cart {
     @Column(name = "id")
     private Integer id;
 
+
     @ManyToOne
     @JoinColumn(name = "productId")
     private Product product;

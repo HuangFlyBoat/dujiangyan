@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface SpeRepository extends JpaRepository<Spe, Integer> {
     List<Spe> findAllByProductId(int productId);
+
+    Spe findBySpeId(int speId);
 }

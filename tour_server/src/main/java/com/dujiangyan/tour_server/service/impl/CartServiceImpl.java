@@ -37,8 +37,12 @@ public class CartServiceImpl implements CartService {
         // 获取用户id
         LoginInfo userInfo = (LoginInfo) request.getSession().getAttribute("login");
         Integer userId = userInfo.getId();
+        Spe spe = new Spe();
+        spe.setSpeId(speId);
+        Product product = new Product();
+        product.setId(productId);
         // 根据用户id、商品id和规格id查询购物车记录
-        Cart existingCart = cartRepository.findCartByUserIdAndProduct_IdAndSpe_SpeId(userId, speId, productId);
+        Cart existingCart = cartRepository.findCartByUserIdAndProductAndSpe(userId, product, spe);
 
         if (existingCart != null) {
             // 如果找到了现有的记录，更新数量
@@ -48,20 +52,18 @@ public class CartServiceImpl implements CartService {
                 cartRepository.delete(existingCart);
                 return 0; // 假设删除成功返回0
             } else {
-                // 数量大于0，保存更新的记录
                 cartRepository.save(existingCart);
                 return existingCart.getId();
             }
         } else {
             // 如果没有找到现有的记录，插入新的记录
             // 根据商品id和规格id查询响应对象
-            Spe spe = speRepository.findById(speId)
-                    .orElseThrow(() -> new RuntimeException("SpeDTO not found"));
-            Product product = productRepository.findById(productId)
+            Spe spe1 = speRepository.findBySpeId(speId);
+            Product product1 = productRepository.findById(productId)
                     .orElseThrow(() -> new RuntimeException("Product not found"));
 
-            cart.setProduct(product);
-            cart.setSpe(spe);
+            cart.setProduct(product1);
+            cart.setSpe(spe1);
             cart.setUserId(userId);
             cartRepository.save(cart);
             return cart.getId();
