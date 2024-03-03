@@ -1,14 +1,21 @@
 package com.dujiangyan.tour_server.domain;
 
-import com.dujiangyan.tour_server.entity.Product;
-import com.dujiangyan.tour_server.entity.Spe;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
 import java.util.List;
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class ProductDetail extends Product {
+public class ProductDetail {
 
-    List<Spe> speList;
+    private int id;
+
+    private String name;
+
+    private String img;
+
+    private BigDecimal price;
+
+    private String detailImg;
+
+    List<SpeDTO> speList;
 }

@@ -17,7 +17,7 @@ public class ImageUploadController {
 
     @PostMapping("/image")
     public BaseResponse uploadImage(@RequestParam("image") MultipartFile file) {
-        long MAX_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+        long MAX_SIZE = 10 * 1024 * 1024; // 5MB in bytes
 
         if (file.isEmpty()) {
             return ResultUtils.error(ErrorCode.NULL_ERROR);

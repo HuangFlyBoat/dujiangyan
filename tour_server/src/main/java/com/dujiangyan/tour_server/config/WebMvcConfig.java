@@ -26,7 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**") // 所有接口
                 .allowCredentials(true) // 是否发送 Cookie
                 //.allowedOriginPatterns("http://localhost:8080") // 支持域
-                .allowedOrigins("http://localhost:8080")
+                .allowedOrigins("http://localhost:8080","http://localhost:8081")
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // 支持方法
                 .allowedHeaders("*")
                 .exposedHeaders("*");
