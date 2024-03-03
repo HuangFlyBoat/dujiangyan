@@ -31,9 +31,9 @@ public class AddressController {
     }
 
     // 根据ID删除地址
-    @GetMapping("/delete")
-    public BaseResponse deleteAddress(@RequestParam("id") int id) {
-        int res = addressService.deleteById(id);
+    @PostMapping("/delete")
+    public BaseResponse deleteAddress(@RequestBody Address address) {
+        int res = addressService.deleteById(address.getId());
         if (res == 1) {
             return ResultUtils.success(ErrorCode.SUCCESS);
         } else {
