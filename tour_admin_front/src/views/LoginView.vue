@@ -28,7 +28,7 @@
           </t-form-item>
 
           <t-form-item>
-            <t-button theme="primary" type="submit" block>登录</t-button>
+            <t-button theme="primary" :loading="isLoading" type="submit" block>登录</t-button>
           </t-form-item>
         </t-form>
       </t-card>
@@ -38,11 +38,11 @@
 
 <script setup>
 import { loginService } from '@/services/user.js'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { MessagePlugin } from 'tdesign-vue-next'
-import { setToken } from '@/utils/auth'
 
+const isLoading = ref(false)
 const router = useRouter()
 
 const formData = reactive({
@@ -61,13 +61,14 @@ const onReset = () => {
 
 const onSubmit = async ({ validateResult, firstError }) => {
   if (validateResult === true) {
+    isLoading.value = true
     const res = await loginService({ ...formData })
+    isLoading.value = false
     console.log('resres', res)
     if (res.name !== 'admin') {
       MessagePlugin.warning('登录失败，权限不足')
     } else {
       MessagePlugin.success('登录成功')
-      setToken(res.token)
       localStorage.setItem('userName', res.name)
       router.push('/')
     }

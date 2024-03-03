@@ -2,17 +2,6 @@
   <div class="main">
     <t-card>
       <t-table row-key="id" :loading="isLoading" :data="list" :columns="columns">
-        <template #userSex="{ row }">
-          {{ row.userSex || '-' }}
-        </template>
-        <template #isAdmin="{ row }">
-          {{ row.isAdmin === 1 ? '管理员' : '普通用户' }}
-        </template>
-        <template #operation="{ row }">
-          <t-popconfirm @confirm="handleDelete(row)" content="确认删除吗">
-            <t-link theme="danger">删除</t-link>
-          </t-popconfirm>
-        </template>
       </t-table>
       <t-pagination
         style="margin-top: 10px"
@@ -29,8 +18,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { MessagePlugin } from 'tdesign-vue-next'
-import { allUserService, deleteService } from '@/services/user.js'
+
+import { allUserService } from '@/services/user.js'
 
 const columns = ref([
   {
@@ -44,39 +33,27 @@ const columns = ref([
     width: 100
   },
   {
-    colKey: 'userSex',
-    cell: 'userSex',
-    title: '用户性别',
+    colKey: 'email',
+    cell: 'email',
+    title: '邮箱',
     width: 100
   },
   {
-    colKey: 'isAdmin',
-    cell: 'isAdmin',
-    title: '类别',
+    colKey: 'phone',
+    cell: 'phone',
+    title: '电话',
     width: 100
-  },
-  {
-    colKey: 'operation',
-    cell: 'operation',
-    title: '操作',
-    width: 120
   }
 ])
 const isLoading = ref(false)
 const list = ref([])
 const total = ref(0)
 
-const handleDelete = async row => {
-  await deleteService(row.userId)
-  await load()
-  MessagePlugin.success('删除成功')
-}
-
 const load = async () => {
   isLoading.value = true
-  const { userList, total: totalValue } = await allUserService()
-  list.value = userList
-  total.value = totalValue
+  const data = await allUserService()
+  list.value = data
+  total.value = data.length
   isLoading.value = false
 }
 

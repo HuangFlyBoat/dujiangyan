@@ -13,7 +13,7 @@ const loginService = async ({ name, password }) => {
 
 const allUserService = async () => {
   try {
-    const { data } = await http.get('/user/allUser')
+    const { data } = await http.get('/user/userList')
     return data
   } catch (error) {
     MessagePlugin.error(`查找失败,${error}`)
