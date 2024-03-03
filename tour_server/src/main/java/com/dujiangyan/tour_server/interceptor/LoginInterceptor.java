@@ -25,14 +25,19 @@ public class LoginInterceptor implements HandlerInterceptor {
             "/admin/login",
             "/product/getProductList",
             "/product/getDetail",
-            "file/image",
-            "/delete"
+            "/file/image",
+            "/product/delete"
     ));
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        if ("OPTIONS".equals(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return true;
+        }
         String path = request.getRequestURI();
         log.info("🚀 ~ file:AuthenticationInterceptor.java method:preHandle line:26 -----用户请求接口: {} [{}]", path, request.getMethod());
 
