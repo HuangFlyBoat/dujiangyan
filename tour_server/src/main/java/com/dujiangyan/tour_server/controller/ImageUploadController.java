@@ -14,7 +14,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/file")
 public class ImageUploadController {
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+
     @PostMapping("/image")
     public BaseResponse uploadImage(@RequestParam("image") MultipartFile file) {
         if (file.isEmpty()) {
