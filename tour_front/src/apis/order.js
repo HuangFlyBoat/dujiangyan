@@ -11,4 +11,14 @@ const createOrder = async (addressId, formData) => {
   }
 }
 
-export { createOrder }
+const getList = async () => {
+  try {
+    const { data } = await http.get('/order/getOrderLIst')
+    return data
+  } catch (error) {
+    ElMessage.error('获取列表失败')
+    return Promise.resolve([])
+  }
+}
+
+export { createOrder, getList }

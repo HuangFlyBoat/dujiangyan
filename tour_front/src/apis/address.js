@@ -7,7 +7,7 @@ const getAll = async () => {
     const { data } = await http.get(`/address/user?userId=${userId}`)
     return data
   } catch (error) {
-    ElMessage.error('获取失败')
+    ElMessage.error('获取地址失败')
     return Promise.resolve([])
   }
 }
