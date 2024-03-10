@@ -1,5 +1,6 @@
 package com.dujiangyan.tour_server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -29,7 +30,7 @@ public class Order {
     @Column(name = "addressId")
     private int addressId;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Detail> details = new ArrayList<>();
 }

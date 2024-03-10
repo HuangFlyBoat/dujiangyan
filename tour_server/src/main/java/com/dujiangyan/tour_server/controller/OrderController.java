@@ -5,6 +5,7 @@ import com.dujiangyan.tour_server.common.ResultUtils;
 import com.dujiangyan.tour_server.domain.CartInfo;
 import com.dujiangyan.tour_server.domain.CartInfoRequest;
 import com.dujiangyan.tour_server.domain.LoginInfo;
+import com.dujiangyan.tour_server.domain.OrderDTO;
 import com.dujiangyan.tour_server.entity.Order;
 import com.dujiangyan.tour_server.service.OrderService;
 import jakarta.annotation.Resource;
@@ -20,7 +21,7 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping("/getOrderLIst")
-    public BaseResponse<List<Order>> getOrderList(HttpServletRequest request) {
+    public BaseResponse<List<OrderDTO>> getOrderList(HttpServletRequest request) {
         LoginInfo userInfo = (LoginInfo) request.getSession().getAttribute("login");
         int userId = userInfo.getId();
         return ResultUtils.success(orderService.findByUserId(userId));

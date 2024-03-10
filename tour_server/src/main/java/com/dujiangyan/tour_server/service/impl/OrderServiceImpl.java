@@ -1,8 +1,11 @@
 package com.dujiangyan.tour_server.service.impl;
 
 import com.dujiangyan.tour_server.domain.CartInfo;
+import com.dujiangyan.tour_server.domain.OrderDTO;
+import com.dujiangyan.tour_server.entity.Address;
 import com.dujiangyan.tour_server.entity.Detail;
 import com.dujiangyan.tour_server.entity.Order;
+import com.dujiangyan.tour_server.repository.AddressRepository;
 import com.dujiangyan.tour_server.repository.CartRepository;
 import com.dujiangyan.tour_server.repository.DetailRepository;
 import com.dujiangyan.tour_server.repository.OrderRepository;
@@ -14,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +33,26 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private DetailRepository detailRepository;
 
+    @Resource
+    private AddressRepository addressRepository;
+
 
     @Override
-    public List<Order> findByUserId(int userId) {
-        return orderRepository.findByUserId(userId);
+    public List<OrderDTO> findByUserId(int userId) {
+        List<Order> orderList =  orderRepository.findByUserId(userId);
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        for (Order order : orderList) {
+            Address address = addressRepository.getAddressById(order.getAddressId());
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setId(order.getId());
+            orderDTO.setUserId(order.getUserId());
+            orderDTO.setDate(order.getDate());
+            orderDTO.setTotal(order.getTotal());
+            orderDTO.setAddress(address);
+            orderDTOList.add(orderDTO);
+        }
+
+        return orderDTOList;
     }
 
 
