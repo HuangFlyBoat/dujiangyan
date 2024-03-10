@@ -7,6 +7,17 @@
       <el-table-column prop="id" label="Id" />
       <el-table-column prop="date" label="日期" />
       <el-table-column prop="total" label="总价" />
+      <el-table-column label="地址" >
+        <template #default="{ row }">
+          <span>{{ row.address.place }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="联系人/电话" >
+        <template #default="{ row }">
+          <p>{{ row.address.name }}</p>
+          <p>{{ row.address.tel }}</p>
+        </template>
+      </el-table-column>
     </el-table>
 
   </div>
