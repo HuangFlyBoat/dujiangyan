@@ -26,7 +26,7 @@
             </el-form>
           </el-tab-pane>
           <el-tab-pane label="注册" name="second">
-            <el-form :rules="rules" :model="form" label-width="80px">
+            <el-form ref="formRef" :rules="rules" :model="form" label-width="80px">
               <el-form-item label="用户名" prop="userName">
                 <el-input v-model="form.userName" />
               </el-form-item>
@@ -55,7 +55,7 @@
               <el-form-item label="性别">
                 <el-radio-group v-model="form.userSex">
                   <el-radio label="男" :value="0" />
-                  <el-radio label="女" :value="0" />
+                  <el-radio label="女" :value="1" />
                 </el-radio-group>
               </el-form-item>
               <el-form-item>
@@ -74,13 +74,13 @@
 import { ref, reactive } from 'vue'
 import { login, register } from '@/apis/login.js'
 import { ElMessage } from 'element-plus'
-
+const formRef = ref()
 const activeName = ref('first')
 const form = ref({
   userName: '',
   password: '',
   password2: '',
-  gender: 0,
+  userSex: 0,
   email: '',
   phone: ''
 })
@@ -121,14 +121,25 @@ const handleClick = (tab) => {
 
 const onSubmitRegister = async () => {
   console.log(form.value)
-  isLoading.value = true
-  await register(form.value)
-  isLoading.value = false
-  ElMessage.success('注册成功')
-  handleClick('first')
+  if (!formRef.value) return
+  await formRef.value.validate(async (valid, fields) => {
+    if (valid) {
+      isLoading.value = true
+      await register(form.value)
+      isLoading.value = false
+      ElMessage.success('注册成功')
+      handleClick('first')
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
 }
 
 const onSubmitLogin = async () => {
+  if (form.value.userName === '' || form.value.password === '') {
+    ElMessage.error('请输入账号或者密码')
+    return
+  }
   isLoading.value = true
   const res = await login(form.value)
   isLoading.value = false

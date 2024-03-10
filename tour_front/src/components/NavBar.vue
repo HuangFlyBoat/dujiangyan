@@ -50,6 +50,13 @@
           </router-link>
         </div>
         <div v-if="isLogin" class="header-navigation-item">
+          <router-link to="/orders" @click="handleNavClick('orders')">
+            <div class="text-label">
+              <div :class="isActive('orders') ? 'showLine' : ''" class="title" title="">我的订单</div>
+            </div>
+          </router-link>
+        </div>
+        <div v-if="isLogin" class="header-navigation-item">
             <div style="cursor:auto;" class="text-label">
               <span style="padding-bottom: 5px;color: white;" text>{{ userName }}</span>
               <el-link @click="loginOut">退出登录</el-link>

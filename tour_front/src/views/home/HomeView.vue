@@ -116,7 +116,7 @@ const getHot = async () => {
   loadingHot.value = true
   const data = await getProductList()
   loadingHot.value = false
-  goodsImgList.value = data.slice(0, 3)
+  goodsImgList.value = data.slice(0, 5)
 }
 
 onMounted(() => {
